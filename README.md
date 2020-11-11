@@ -6,9 +6,24 @@ Repozitorij z gradivi pri predmetu APPR v študijskem letu 2020/21
 * [![RStudio](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/mateabt/APPR-2020-21/master?urlpath=rstudio) RStudio
 
 ## Tematika
+Analizirala bom zunanjo trgovino Nemčije kot eno od najbolj razvitih svetovnih gospodarstev in hkrati precej odprto gospodarstvo.Pogledala 
+si bom podatke o izvozu in uvozu po letih ter po posameznimi dejavnosti.Poleg tega bi tudi pogledala s katere države ima naobsežno trgovino
 
-Izbrali si boste temo, s katero se bo vaš projekt ukvarjal.
-Tukaj boste napisali, kje ste dobili podatke, ter kakšen je vaš cilj.
+###### Tabele:
+
+* `1.tabela` :xlsx datoteka (Vrstni red nemških trgovskih partnerjev -uvoz,izvoz)
+Analizala bi neto izvoz in celotni promet posamezne države 
+https://www.destatis.de/EN/Themes/Economy/Foreign-Trade/Tables/order-rank-germany-trading-partners.html
+
+* `2.tabela` :html (Izvoz in uvoz po razdelitvi klasifikacije proizvodov)
+Katere dejavnosti prinašajo največji uvoz/izvoz
+https://www.destatis.de/EN/Themes/Economy/Foreign-Trade/Tables/imports-exports.html?fbclid=IwAR2tVMBoA4bC6YXHvIVtzUXAD99eHUwEJLo6MAWLsQ31lm039Qm81uSTOFU
+
+* `3.tabela` :pdf (Splošni razvoj zunanje trgovine po letih)
+Pogledala bi kako se je zunajna trgovina gibala po letih 
+https://www.destatis.de/EN/Themes/Economy/Foreign-Trade/Tables/overall-development-foreign-trade.pdf?__blob=publicationFile&fbclid=IwAR1fflqYZaQy5LMYTNbA3XWQhij-ERHS0VkPFFRbfZpD4rYhQqecATqdPI4
+
+
 
 ## Program
 
