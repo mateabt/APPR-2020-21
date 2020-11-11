@@ -7,7 +7,7 @@ Repozitorij z gradivi pri predmetu APPR v študijskem letu 2020/21
 
 ## Tematika
 Analizirala bom zunanjo trgovino Nemčije kot eno od najbolj razvitih svetovnih gospodarstev in hkrati precej odprto gospodarstvo.Pogledala 
-si bom podatke o izvozu in uvozu po letih ter po posameznimi dejavnosti.Poleg tega bi tudi pogledala s katere države ima naobsežno trgovino
+si bom podatke o izvozu in uvozu po letih ter po posameznimi dejavnosti.Poleg tega bi tudi pogledala s katere države ima najobsežno trgovino
 
 ###### Tabele:
 
