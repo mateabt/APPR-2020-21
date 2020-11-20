@@ -6,7 +6,8 @@ sl <- locale("sl", decimal_mark=",", grouping_mark=".")
 
 stolpci <- c("Drzave_izvoz","izvoz_v_1000eur","Drzave_uvoz","uvoz_v_1000eur")
 uvoz <-read_xlsx("order-rank-germany-trading-partners-xls .xlsx",sheet="Ranking",
-                                range = "B8:E251", col_names=stolpci)
+                                range = "B8:E251", col_names=stolpci,
+                                na= "-")
 
 TRGOVSKE_PARTNERJE_IZVOZ <- uvoz[,c(1,2)]
 TRGOVSKE_PARTNERJE_UVOZ <- uvoz[,c(3,4)]
