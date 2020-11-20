@@ -2,6 +2,28 @@
 
 sl <- locale("sl", decimal_mark=",", grouping_mark=".")
 
+#Funkcija ki uvozi nemških trgovskih partnerjev iz xlsx datoteko
+
+stolpci <- c("Drzave_izvoz","izvoz_v_1000eur","Drzave_uvoz","uvoz_v_1000eur")
+uvoz <-read_xlsx("order-rank-germany-trading-partners-xls .xlsx",sheet="Ranking",
+                                range = "B8:E251", col_names=stolpci)
+
+TRGOVSKE_PARTNERJE_IZVOZ <- uvoz[,c(1,2)]
+TRGOVSKE_PARTNERJE_UVOZ <- uvoz[,c(3,4)]
+
+
+TRGOVINSKE_PARTNERJE_TIDY <- uvoz
+colnames(TRGOVINSKE_PARTNERJE_TIDY) <-  c("Drzave_izvoz","izvoz_v_1000eur","Drzave_uvoz","uvoz_v_1000eur")
+
+TRGOVINSKE_PARTNERJE_TIDY <- 
+  full_join(
+    TRGOVINSKE_PARTNERJE_TIDY %>% select(Drzave_izvoz, izvoz_v_1000eur),
+    TRGOVINSKE_PARTNERJE_TIDY %>% select(Drzave_uvoz,uvoz_v_1000eur),
+    by = c('Drzave_izvoz' = 'Drzave_uvoz')
+  )
+
+
+
 # Funkcija, ki uvozi občine iz Wikipedije
 uvozi.obcine <- function() {
   link <- "http://sl.wikipedia.org/wiki/Seznam_ob%C4%8Din_v_Sloveniji"
