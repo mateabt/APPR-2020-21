@@ -102,10 +102,10 @@ Uvoz_pdf<-function(){
     ## preimenovanja stolpce
     into = c('leto', 'izvoz', 'uvoz', 'neto_izvoz', 'perc_change_ex','perc_change_im'),
     
-    ## select the column delimeter
+    ## delimetar za stolpce
     sep = ";"
   ) %>% 
-  ## final cleaning of column spaces and coerce into double format.
+  ## končno čiščenje prostorov stolpcev in prisila v dvojni format.
   mutate(across(c(izvoz, uvoz, neto_izvoz ,perc_change_ex ,perc_change_im), ~ as.double(str_remove_all(.x, "\\s"))))
   
   return(PDF_uvoz)
