@@ -5,12 +5,6 @@ sl <- locale("sl", decimal_mark=",", grouping_mark=".")
 #Funkcija ki uvozi nemških trgovskih partnerjev iz xlsx datoteko
 
 
-
-TRGOVSKE_PARTNERJE_IZVOZ <- uvoz[,c(1,2)]
-TRGOVSKE_PARTNERJE_UVOZ <- uvoz[,c(3,4)]
-
-
-
 UVOZI_TRGOVINSKE_PARTNERJE <- function(){
   stolpci <- c("Drzave_izvoz","izvoz_v_1000eur","Drzave_uvoz","uvoz_v_1000eur")
   uvoz <-read_xlsx("order-rank-germany-trading-partners-xls .xlsx",sheet="Ranking",
@@ -21,18 +15,44 @@ UVOZI_TRGOVINSKE_PARTNERJE <- function(){
   TRGOVINSKE_PARTNERJE_TIDY <- uvoz
   colnames(TRGOVINSKE_PARTNERJE_TIDY) <-  c("Drzave_izvoz","izvoz_v_1000eur","Drzave_uvoz","uvoz_v_1000eur")
   
-  
+  TRGOVINSKE_PARTNERJE_TIDY<-
   full_join(
     TRGOVINSKE_PARTNERJE_TIDY %>% select(Drzave_izvoz, izvoz_v_1000eur),
     TRGOVINSKE_PARTNERJE_TIDY %>% select(Drzave_uvoz,uvoz_v_1000eur),
     by = c('Drzave_izvoz' = 'Drzave_uvoz')
   )
-
-return(TRGOVINSKE_PARTNERJE_TIDY)
+  TRGOVINSKE_PARTNERJE_TIDY<- TRGOVINSKE_PARTNERJE_TIDY %>%
+    rename(Drzave = Drzave_izvoz)
+        
+                
+  
+  return(TRGOVINSKE_PARTNERJE_TIDY)
 }
 
 
+
 TRGOVSKE_PARTNERJE<-UVOZI_TRGOVINSKE_PARTNERJE()
+
+
+#Funkcija ki uvozi podatki o Izvoz in uvoz po razdelitvi klasifikacije proizvodov iz html
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
