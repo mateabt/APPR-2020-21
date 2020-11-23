@@ -111,6 +111,7 @@ Uvoz_pdf<-function(){
   return(PDF_uvoz)
 }
 
+# Zapišimo podatke v razpredelnico pdf
 pdf<-Uvoz_pdf()
 
 
