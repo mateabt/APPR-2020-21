@@ -68,40 +68,65 @@ UVOZ_RAZDELITVE<- function() {
 razdelitve<-UVOZ_RAZDELITVE()
 
 
+#Funkcija ki uvozi podatke o splošni razvoj zunanje trgovine po letih iz pdf datoteke
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Funkcija, ki uvozi podatke iz datoteke druzine.csv
-uvozi.druzine <- function(obcine) {
-  data <- read_csv2("podatki/druzine.csv", col_names=c("obcina", 1:4),
-                    locale=locale(encoding="Windows-1250"))
-  data$obcina <- data$obcina %>% strapplyc("^([^/]*)") %>% unlist() %>%
-    strapplyc("([^ ]+)") %>% sapply(paste, collapse=" ") %>% unlist()
-  data$obcina[data$obcina == "Sveti Jurij"] <- iconv("Sveti Jurij ob Ščavnici", to="UTF-8")
-  data <- data %>% pivot_longer(`1`:`4`, names_to="velikost.druzine", values_to="stevilo.druzin")
-  data$velikost.druzine <- parse_number(data$velikost.druzine)
-  data$obcina <- parse_factor(data$obcina, levels=obcine)
-  return(data)
+Uvoz_pdf<-function(){
+  PDF_uvoz <- pdf_text("podatki/overall-development-foreign-trade.pdf") %>% 
+              str_split("\n")
+          ## selecting podatke ki rabimo
+  PDF_uvoz <- as.data.frame(PDF_uvoz[[2]][8:77]) %>% 
+    ## poimenovanje za lazje delo
+    rename(podatke = `PDF_uvoz[[2]][8:77]`)%>%
+   
+    
+  ## ciscenje stolpce
+  mutate(
+    ## določite vzorec za povezavo pozitivnih in negativnih znakov z zadnjima dvema stolpcema
+    ## (? <= [\\ + -]) je pogled nazaj ki nam kaze  "poiščite + ali -, ki je pred naslednjo vrednostjo, ki je več kot 1 presledek \\ s +
+    ## (? = [0-9]) je pozitiven pogled naprej, ki pravi: "poiščite več presledkov, ki jim sledi številka"
+    
+    podatke = str_remove_all(podatke, "(?<=[\\+-])\\s+(?=[0-9])"),
+    
+    ## odstrani odvečne presledke in jih zamenja s podpičjem, da prepoznamo prelome stolpcev
+    podatke = str_replace_all(podatke, "\\s{2,}", ";"),
+    
+    ## vejico v decimalnih številkah zamenjamo s piko 
+    podatke = str_replace_all(podatke, ",", "\\."),
+    
+    ## odstrani nove vrstice, odvečne podpičja in pozitivne znake
+    podatke = str_remove_all(podatke, "\\r|\\+|^;")
+  ) %>% 
+  separate(
+    col = podatke ,
+    
+    ## preimenovanja stolpce
+    into = c('leto', 'izvoz', 'uvoz', 'neto_izvoz', 'perc_change_ex','perc_change_im'),
+    
+    ## select the column delimeter
+    sep = ";"
+  ) %>% 
+  ## final cleaning of column spaces and coerce into double format.
+  mutate(across(c(izvoz, uvoz, neto_izvoz ,perc_change_ex ,perc_change_im), ~ as.double(str_remove_all(.x, "\\s"))))
+  
+  return(PDF_uvoz)
 }
 
-# Zapišimo podatke v razpredelnico obcine
-obcine <- uvozi.obcine()
+pdf<-Uvoz_pdf()
 
-# Zapišimo podatke v razpredelnico druzine.
-druzine <- uvozi.druzine(levels(obcine$obcina))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Če bi imeli več funkcij za uvoz in nekaterih npr. še ne bi
 # potrebovali v 3. fazi, bi bilo smiselno funkcije dati v svojo

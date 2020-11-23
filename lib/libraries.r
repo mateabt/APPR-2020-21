@@ -12,7 +12,10 @@ library("readxl")
 library("openxlsx")
 library(dplyr)
 library(readr)
-library(tidyverse) 
+
+library(tidyverse)
+library(pdftools)
+
 
 
 # Uvozimo funkcije za pobiranje in uvoz zemljevida.
