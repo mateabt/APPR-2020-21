@@ -5,11 +5,14 @@ library(tidyr)
 library(tmap)
 library(shiny)
 
+
+options(gsubfn.engine="R")
+
 library("readxl")
 library("openxlsx")
 library(dplyr)
 library(readr)
-library(tidyverse)
+library(tidyverse) 
 
 
 # Uvozimo funkcije za pobiranje in uvoz zemljevida.
