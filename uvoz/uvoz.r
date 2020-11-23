@@ -50,7 +50,14 @@ UVOZ_RAZDELITVE<- function() {
       }
       tabela$Division <- NULL
       tabela<-tabela[-c(1,2,33),]
+      
       colnames(tabela) <- c("opis blaga","izvoz_mio","uvoz_mio")
+      for (col in c("izvoz_mio","uvoz_mio")) {
+        if (is.character(tabela[[col]])) {
+          tabela[[col]] <- parse_number(tabela[[col]], na="-", locale=sl)
+        }
+      }
+      
       
       return(tabela)
 }
