@@ -5,7 +5,7 @@ sl <- locale("sl", decimal_mark=",", grouping_mark=".")
 #Funkcija ki uvozi nemških trgovskih partnerjev iz xlsx datoteko
 
 
-UVOZI_TRGOVINSKE_PARTNERJE <- function(){
+UVOZ_TRGOVINSKE_PARTNERJE <- function(){
   stolpci <- c("Drzave_izvoz","izvoz_v_1000eur","Drzave_uvoz","uvoz_v_1000eur")
   uvoz <-read_xlsx("order-rank-germany-trading-partners-xls .xlsx",sheet="Ranking",
                    range = "B8:E251", col_names=stolpci,
@@ -31,15 +31,31 @@ UVOZI_TRGOVINSKE_PARTNERJE <- function(){
 
 
 
-TRGOVSKE_PARTNERJE<-UVOZI_TRGOVINSKE_PARTNERJE()
+TRGOVSKE_PARTNERJE<-UVOZ_TRGOVINSKE_PARTNERJE()
 
 
 #Funkcija ki uvozi podatki o Izvoz in uvoz po razdelitvi klasifikacije proizvodov iz html
 
 
+UVOZ_RAZDELITVE<- function() {
+      link <-"https://www.destatis.de/EN/Themes/Economy/Foreign-Trade/Tables/imports-exports.html?fbclid=IwAR2tVMBoA4bC6YXHvIVtzUXAD99eHUwEJLo6MAWLsQ31lm039Qm81uSTOFU"
+      stran <- html_session(link) %>% read_html()
+      tabela <- stran %>% html_nodes(xpath="//table[@class='wide']") %>%
+        .[[1]] %>% html_table(dec=",", fill = TRUE)
+      for (i in 1:ncol(tabela)) {
+        if (is.character(tabela[[i]])) {
+          Encoding(tabela[[i]]) <- "UTF-8"
+        }
+      }
+      tabela$Division <- NULL
+      tabela<-tabela[-c(1,2,33),]
+      colnames(tabela) <- c("opis blaga","izvoz_mio","uvoz_mio")
+      
+      return(tabela)
+}
 
 
-
+razdelitve<-UVOZ_RAZDELITVE()
 
 
 
