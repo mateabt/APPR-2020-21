@@ -30,6 +30,7 @@ UVOZ_TRGOVINSKE_PARTNERJE <- function(){
 }
 
 
+# Zapišimo podatke v razpredelnico TRGOVSKE_PARTNERJE
 
 TRGOVSKE_PARTNERJE<-UVOZ_TRGOVINSKE_PARTNERJE()
 
@@ -54,6 +55,8 @@ UVOZ_RAZDELITVE<- function() {
       return(tabela)
 }
 
+
+# Zapišimo podatke v razpredelnico razdelitve
 
 razdelitve<-UVOZ_RAZDELITVE()
 
