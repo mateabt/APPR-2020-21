@@ -4,7 +4,7 @@ library(gsubfn)
 library(tidyr)
 library(tmap)
 library(shiny)
-
+library(RColorBrewer)
 
 options(gsubfn.engine="R")
 
