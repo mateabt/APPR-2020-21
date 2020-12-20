@@ -16,6 +16,11 @@ library(readr)
 library(tidyverse)#library(dplyr),library(tidyr)
 library(pdftools)
 
+library(StandardizeText)
+library(scales)
+library(ggthemes)
+library(ggplot2)
+
 
 
 # Uvozimo funkcije za pobiranje in uvoz zemljevida.
