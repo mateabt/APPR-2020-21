@@ -1,15 +1,33 @@
 # 3. faza: Vizualizacija podatkov
+source("lib/uvozi.zemljevid.r", encoding = "UTF-8")
+source("lib/libraries.r", encoding = "UTF-8")
+source("uvoz/uvoz.r", encoding = "UTF-8")
+library(StandardizeText)
 
-# Uvozimo zemljevid.
-zemljevid <- uvozi.zemljevid("http://baza.fmf.uni-lj.si/OB.zip", "OB",
-                             pot.zemljevida="OB", encoding="Windows-1250")
-# Če zemljevid nima nastavljene projekcije, jo ročno določimo
-proj4string(zemljevid) <- CRS("+proj=utm +zone=10+datum=WGS84")
+# Izračun neto izvoza(izvoz - uvoz) za posamezne države 
 
-levels(zemljevid$OB_UIME) <- levels(zemljevid$OB_UIME) %>%
-  { gsub("Slovenskih", "Slov.", .) } %>% { gsub("-", " - ", .) }
-zemljevid$OB_UIME <- factor(zemljevid$OB_UIME, levels=levels(obcine$obcina))
+minus <- function(x) sum(x[1],na.rm=T) - sum(x[2],na.rm=T)
 
-# Izračunamo povprečno velikost družine
-povprecja <- druzine %>% group_by(obcina) %>%
-  summarise(povprecje=sum(velikost.druzine * stevilo.druzin) / sum(stevilo.druzin))
+NETO_TRGOVSKE<-TRGOVSKE_PARTNERJE %>% 
+  mutate(
+    neto_izvoz=apply(TRGOVSKE_PARTNERJE[,c('izvoz_v_1000eur','uvoz_v_1000eur')],1,minus) 
+)
+
+
+NETO_TRGOVSKE$Drzave <-standardize.countrynames(NETO_TRGOVSKE$Drzave, suggest = "auto",print.changes = FALSE)
+
+  
+  zemljevid <- uvozi.zemljevid("https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/50m/cultural/ne_50m_admin_0_countries.zip",
+                               
+                               "ne_50m_admin_0_countries",mapa="./zemljevidi") %>% fortify()
+  
+
+  
+  zemljevid_neto_izvoz <- ggplot() + 
+    geom_polygon(data=left_join(zemljevid, NETO_TRGOVSKE %>% group_by(Drzave) %>% summarise(neto_izvoz=sum(neto_izvoz,na.rm=TRUE)),by=c("SOVEREIGNT"="Drzave")), 
+                 aes(x=long, y=lat, group=group, fill=`neto_izvoz`), size=0.1) +
+    labs(x="", y="", fill="Izvoz - Uvoz", title = "neto izvoz") + 
+    theme_map(base_size = 20) +
+    theme(legend.position = "bottom")
+  
+  
