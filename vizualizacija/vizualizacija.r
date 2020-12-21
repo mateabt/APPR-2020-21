@@ -11,15 +11,25 @@ NETO_TRGOVSKE<-TRGOVSKE_PARTNERJE %>%
 )
 
 
-NETO_TRGOVSKE$Drzave <-standardize.countrynames(NETO_TRGOVSKE$Drzave, suggest = "auto", print.changes = FALSE)
+#neto izvoz v milionih zemjevid
+
 
   
   zemljevid <- uvozi.zemljevid("https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/50m/cultural/ne_50m_admin_0_countries.zip",
                                
                                "ne_50m_admin_0_countries",mapa="./zemljevidi") %>% fortify()
   
-
+  #da se imena ujemajo
+  NETO_TRGOVSKE$Drzave <-standardize.countrynames(NETO_TRGOVSKE$Drzave, suggest = "auto", print.changes = FALSE)
   
+  zemljevid$SOVEREIGNT <-standardize.countrynames(zemljevid$SOVEREIGNT, suggest = "auto", print.changes = FALSE)
+  #napaka in razlike v razpredelnici
+  
+  NETO_TRGOVSKE$Drzave[NETO_TRGOVSKE$Drzave=="Lithuana"] <-"Lithuania"
+  NETO_TRGOVSKE$Drzave[NETO_TRGOVSKE$Drzave=="Bangladesch"] <-"Bangladesh"
+  NETO_TRGOVSKE$Drzave[NETO_TRGOVSKE$Drzave=="New Zeeland"] <-"New Zealand"
+  
+
   plot_data <- NETO_TRGOVSKE %>% 
     group_by(Drzave) %>% 
     summarise(neto_izvoz=sum(neto_izvoz,na.rm=TRUE)) %>%
@@ -27,11 +37,16 @@ NETO_TRGOVSKE$Drzave <-standardize.countrynames(NETO_TRGOVSKE$Drzave, suggest = 
   
   zemljevid_neto_izvoz <- 
     ggplot(plot_data, aes(x=long, y=lat, group=group, fill=`neto_izvoz`/1e6)) + 
-    geom_polygon(data=, size=0.1) +
+    geom_polygon(data=, size=0.1,color = "white") +
     labs(x="", y="", fill="Izvoz - Uvoz", title = "neto izvoz  v milionih") + 
     theme_map(base_size = 10) +
     theme(legend.position = "right")+
-    scale_fill_continuous(label=comma)
+    scale_fill_continuous(label=comma)+
+    scale_fill_gradient(low="red3",high="yellow")
+    
+    
+     
+  
    
   
  plot1<-plot(zemljevid_neto_izvoz)
