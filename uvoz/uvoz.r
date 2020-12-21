@@ -115,6 +115,16 @@ Uvoz_pdf<-function(){
 pdf<-Uvoz_pdf()
 
 
+# BDP po leti of 1991 
+
+UVOZ_BDP <- function(){
+  uvoz <-read_xlsx("podatki/GDP.xlsx",header=TRUE)
+  colnames(uvoz)<-c("Leti","BDP")
+  return(uvoz)
+}
+
+BDP<-UVOZ_BDP()
+
 
 
 
