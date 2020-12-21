@@ -21,6 +21,8 @@ library(scales)
 library(ggthemes)
 library(ggplot2)
 
+library(gganimate)
+
 
 
 # Uvozimo funkcije za pobiranje in uvoz zemljevida.
