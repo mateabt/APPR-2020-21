@@ -22,6 +22,7 @@ library(ggthemes)
 library(ggplot2)
 
 library(gganimate)
+library(gifski)
 
 
 

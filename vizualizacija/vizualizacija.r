@@ -50,3 +50,31 @@ NETO_TRGOVSKE<-TRGOVSKE_PARTNERJE %>%
    
   
  plot1<-plot(zemljevid_neto_izvoz)
+ 
+ 
+ 
+ #bubble aminimated zemjevid
+ skupaj<-left_join(BDP,pdf,by=c("Leti"="leto"))
+ skupaj$Leti<-as.numeric(skupaj$Leti)
+
+ library(gifski)
+ 
+ p<-ggplot(skupaj, aes(x=izvoz,y=uvoz , size =neto_izvoz)) +
+   geom_point(color="red2") +
+   scale_x_log10() +
+   theme_bw() +
+   
+   labs(title = 'Leto: {frame_time}',
+        x = 'Uvoz',
+        y = 'Izvoz') +
+   scale_size(range = c(1,10))+
+   transition_time(Leti) +
+   ease_aes('linear')+
+   shadow_wake(0.2)
+ 
+ 
+ 
+ renderer = gifski_renderer() 
+ animate(p, renderer = gifski_renderer())
+
+ 
