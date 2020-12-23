@@ -38,11 +38,13 @@ source("uvoz/uvoz.r", encoding="UTF-8")
 
 Uvozila sem podatke o Nemškem trgovinu v obliki xlsx s statističnega urada Nemčije ter v obliki HTML in PDF datoteke. Podatke sem prečistila in dala v treh razpredelnicah v obliki *tidy data*.
 
-1. `druzine` - podatki o družinah za vsako občino
-  - `obcina` - spremenljivka: ime občine (neurejen faktor),
-  - `velikost.druzine` - spremenljivka: število otrok v družini (število: 1, 2, 3 ali 4, kjer zadnja vrednost pomeni 4 ali več),
-  - `stevilo.druzin` - meritev: število družin z ustreznim številom otrok v ustrezni občini (število).
-
+1. `Trgovinski_partnerji` - podatki o Nemških trgovskih partnerjev
+  - `Drzave` -spremenljivka: trgovske partnerje
+  - `Uvoz` - spremenljivka: ime države iz katere Nemčija uvaža (besedilo),
+  - `Izvoz` - spremenljivka:ime države iz katere Nemčija uvaža (besedilo),
+  - `Neto izvoz` - spremenljivka: Izvoz minus uvoz za države (besedilo).
+  - `Vrednost` - metitev:
+  
 2. `obcine` - podatki o občinah
   - `obcina` - spremenljivka: ime občine (neurejen faktor),
   - `povrsina` - meritev: površina občine v km$^2$ (število),
