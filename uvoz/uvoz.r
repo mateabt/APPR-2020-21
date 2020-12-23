@@ -107,6 +107,7 @@ Uvoz_pdf<-function(){
   ) %>% 
   ## končno čiščenje prostorov stolpcev in prisila v dvojni format.
   mutate(across(c(izvoz, uvoz, neto_izvoz ,perc_change_ex ,perc_change_im), ~ as.double(str_remove_all(.x, "\\s"))))
+  PDF_uvoz<-PDF_uvoz[,-(4:6)]
   
   return(PDF_uvoz)
 }
