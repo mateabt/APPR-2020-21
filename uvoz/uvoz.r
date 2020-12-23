@@ -24,15 +24,27 @@ UVOZ_TRGOVINSKE_PARTNERJE <- function(){
   TRGOVINSKE_PARTNERJE_TIDY<- TRGOVINSKE_PARTNERJE_TIDY %>%
     rename(Drzave = Drzave_izvoz)
         
-                
+ 
   
-  return(TRGOVINSKE_PARTNERJE_TIDY)
+  minus <- function(x) sum(x[1],na.rm=T) - sum(x[2],na.rm=T)
+  plus <-  function(x) sum(x[1],na.rm=T) + sum(x[2],na.rm=T)
+  
+  NETO_TRGOVSKE <- TRGOVINSKE_PARTNERJE_TIDY %>% 
+    mutate("Neto izvoz"=izvoz_v_1000eur - uvoz_v_1000eur) %>%
+    rename(Izvoz=izvoz_v_1000eur, Uvoz=uvoz_v_1000eur) %>%
+    pivot_longer(-Drzave, names_to="Podatek", values_to="Vrednost")
+  
+  
+  
+  return(NETO_TRGOVSKE)
 }
 
 
 # Zapišimo podatke v razpredelnico TRGOVSKE_PARTNERJE
 
 TRGOVSKE_PARTNERJE<-UVOZ_TRGOVINSKE_PARTNERJE()
+
+
 
 
 #Funkcija ki uvozi podatki o Izvoz in uvoz po razdelitvi klasifikacije proizvodov iz html
@@ -58,8 +70,25 @@ UVOZ_RAZDELITVE<- function() {
         }
       }
       
+      minus <- function(x) sum(x[1],na.rm=T) - sum(x[2],na.rm=T)
+      plus <-  function(x) sum(x[1],na.rm=T) + sum(x[2],na.rm=T)
       
-      return(tabela)
+      NETO_RAZDELITVE<-tabela %>% 
+        mutate(
+          neto_izvoz=apply(tabela[,c('izvoz_mio','uvoz_mio')],1,minus) 
+        )
+      
+      NETO_RAZDELITVE<-NETO_RAZDELITVE %>% 
+        mutate(
+          obrt=apply(tabela[,c('izvoz_mio','uvoz_mio')],1,plus) 
+        )
+      
+      NETO_RAZDELITVE <- NETO_RAZDELITVE %>% 
+        pivot_longer(-`opis blaga`, names_to="Podatek", values_to="Vrednost")
+      
+      
+      
+      return(NETO_RAZDELITVE)
 }
 
 
@@ -109,11 +138,17 @@ Uvoz_pdf<-function(){
   mutate(across(c(izvoz, uvoz, neto_izvoz ,perc_change_ex ,perc_change_im), ~ as.double(str_remove_all(.x, "\\s"))))
   PDF_uvoz<-PDF_uvoz[,-(4:6)]
   
-  return(PDF_uvoz)
+  
+  
+  pdf<-pdf_uvoz%>% 
+    pivot_longer(-leto, names_to="Podatek", values_to="Vrednost")
+  return(pdf)
 }
 
 # Zapišimo podatke v razpredelnico pdf
 pdf<-Uvoz_pdf()
+
+
 
 
 # BDP po leti of 1991 
@@ -125,6 +160,9 @@ UVOZ_BDP <- function(){
 }
 
 BDP<-UVOZ_BDP()
+
+
+
 
 
 
