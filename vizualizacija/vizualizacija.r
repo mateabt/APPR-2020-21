@@ -6,10 +6,10 @@
 minus <- function(x) sum(x[1],na.rm=T) - sum(x[2],na.rm=T)
 plus <-  function(x) sum(x[1],na.rm=T) + sum(x[2],na.rm=T)
 
-NETO_TRGOVSKE<-TRGOVSKE_PARTNERJE %>% 
-  mutate(
-    neto_izvoz=apply(TRGOVSKE_PARTNERJE[,c('izvoz_v_1000eur','uvoz_v_1000eur')],1,minus) 
-)
+NETO_TRGOVSKE <- TRGOVSKE_PARTNERJE %>% 
+  mutate("Neto izvoz"=izvoz_v_1000eur - uvoz_v_1000eur) %>%
+  rename(Izvoz=izvoz_v_1000eur, Uvoz=uvoz_v_1000eur) %>%
+  pivot_longer(-Drzave, names_to="Podatek", values_to="Vrednost")
 
 NETO_RAZDELITVE<-razdelitve %>% 
   mutate(
@@ -26,6 +26,7 @@ NETO_RAZDELITVE<-NETO_RAZDELITVE %>%
 
 
   
+
   zemljevid <- uvozi.zemljevid("https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/50m/cultural/ne_50m_admin_0_countries.zip",
                                
                                "ne_50m_admin_0_countries",mapa="./zemljevidi") %>% fortify()
@@ -111,4 +112,22 @@ NETO_RAZDELITVE<-NETO_RAZDELITVE %>%
      main="uvoz po razdelitve",clockwise=TRUE,cex=0.5,labels=pct1)
  legend("right", inset=c(-0.9,0),cex=0.5,legend =unique(lbls), bty="n",fill=rainbow(length(lbls)))
  
+ #izovoz po klasifikacije
  
+ 
+ slices <- c(NETO_RAZDELITVE$izvoz_mio)
+ lbls <- c(NETO_RAZDELITVE$`opis blaga`)
+ pct <- round(slices/sum(slices)*100)
+ pct1 <- paste(pct,"%",sep="")
+ lbls <- paste(lbls, pct) # dodaj odstotke na labels 
+ lbls <- paste(lbls,"%",sep="") # doda znak % 
+ par(mai = c(0,0,1,3))
+ 
+ 
+ 
+ pie(slices, col=rainbow(length(lbls)),
+     main="izvoz po razdelitve",clockwise=TRUE,cex=0.5,labels=pct1)
+ legend("right", inset=c(-0.9,0),cex=0.5,legend =unique(lbls), bty="n",fill=rainbow(length(lbls)))
+ 
+ 
+ #
