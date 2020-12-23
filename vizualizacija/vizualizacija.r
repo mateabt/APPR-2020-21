@@ -108,7 +108,7 @@ NETO_RAZDELITVE<-NETO_RAZDELITVE %>%
  
  
  pie(slices, col=rainbow(length(lbls)),
-     main="izvoz po razdelitve",clockwise=TRUE,cex=0.5,labels=pct1)
+     main="uvoz po razdelitve",clockwise=TRUE,cex=0.5,labels=pct1)
  legend("right", inset=c(-0.9,0),cex=0.5,legend =unique(lbls), bty="n",fill=rainbow(length(lbls)))
  
  
