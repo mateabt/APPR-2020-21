@@ -1,14 +1,25 @@
 # 3. faza: Vizualizacija podatkov
 
 
-# Izračun neto izvoza(izvoz - uvoz) za posamezne države 
+# Izračun neto izvoza(izvoz - uvoz) za posamezne države in razdelitve 
 
 minus <- function(x) sum(x[1],na.rm=T) - sum(x[2],na.rm=T)
+plus <-  function(x) sum(x[1],na.rm=T) + sum(x[2],na.rm=T)
 
 NETO_TRGOVSKE<-TRGOVSKE_PARTNERJE %>% 
   mutate(
     neto_izvoz=apply(TRGOVSKE_PARTNERJE[,c('izvoz_v_1000eur','uvoz_v_1000eur')],1,minus) 
 )
+
+NETO_RAZDELITVE<-razdelitve %>% 
+  mutate(
+    neto_izvoz=apply(razdelitve[,c('izvoz_mio','uvoz_mio')],1,minus) 
+  )
+
+NETO_RAZDELITVE<-NETO_RAZDELITVE %>% 
+  mutate(
+    obrt=apply(razdelitve[,c('izvoz_mio','uvoz_mio')],1,plus) 
+  )
 
 
 #neto izvoz v milionih zemjevid
@@ -79,4 +90,25 @@ NETO_TRGOVSKE<-TRGOVSKE_PARTNERJE %>%
  renderer = gifski_renderer() 
  animate(p, renderer = gifski_renderer())
 
+ 
+ 
+ 
+ 
+ #uvoz po klasifikacije pita
+ 
+ 
+ slices <- c(NETO_RAZDELITVE$uvoz_mio)
+ lbls <- c(NETO_RAZDELITVE$`opis blaga`)
+ pct <- round(slices/sum(slices)*100)
+ pct1 <- paste(pct,"%",sep="")
+ lbls <- paste(lbls, pct) # dodaj odstotke na labels 
+ lbls <- paste(lbls,"%",sep="") # doda znak % 
+ par(mai = c(0,0,1,3))
+
+ 
+ 
+ pie(slices, col=rainbow(length(lbls)),
+     main="Neto izvoz po razdelitve",clockwise=TRUE,cex=0.5,labels=pct1)
+ legend("right", inset=c(-0.9,0),cex=0.5,legend =unique(lbls), bty="n",fill=rainbow(length(lbls)))
+ 
  
