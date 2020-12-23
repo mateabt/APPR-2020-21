@@ -138,9 +138,23 @@ Uvoz_pdf<-function(){
   mutate(across(c(izvoz, uvoz, neto_izvoz ,perc_change_ex ,perc_change_im), ~ as.double(str_remove_all(.x, "\\s"))))
   PDF_uvoz<-PDF_uvoz[,-(4:6)]
   
+  minus <- function(x) sum(x[1],na.rm=T) - sum(x[2],na.rm=T)
+  plus <-  function(x) sum(x[1],na.rm=T) + sum(x[2],na.rm=T)
   
+  pdf<-PDF_uvoz %>% 
+    mutate(
+      neto_izvoz=apply(PDF_uvoz[,c('izvoz','uvoz')],1,minus) 
+    )
   
-  pdf<-pdf_uvoz%>% 
+ pdf<-pdf %>% 
+    mutate(
+      obrt=apply(PDF_uvoz[,c('izvoz','uvoz')],1,plus) 
+    )
+  
+
+ 
+  
+  pdf<-pdf%>% 
     pivot_longer(-leto, names_to="Podatek", values_to="Vrednost")
   return(pdf)
 }

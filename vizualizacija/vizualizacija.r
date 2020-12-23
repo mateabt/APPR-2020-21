@@ -1,25 +1,6 @@
 # 3. faza: Vizualizacija podatkov
 
 
-# Izračun neto izvoza(izvoz - uvoz) za posamezne države in razdelitve 
-
-minus <- function(x) sum(x[1],na.rm=T) - sum(x[2],na.rm=T)
-plus <-  function(x) sum(x[1],na.rm=T) + sum(x[2],na.rm=T)
-
-NETO_TRGOVSKE <- TRGOVSKE_PARTNERJE %>% 
-  mutate("Neto izvoz"=izvoz_v_1000eur - uvoz_v_1000eur) %>%
-  rename(Izvoz=izvoz_v_1000eur, Uvoz=uvoz_v_1000eur) %>%
-  pivot_longer(-Drzave, names_to="Podatek", values_to="Vrednost")
-
-NETO_RAZDELITVE<-razdelitve %>% 
-  mutate(
-    neto_izvoz=apply(razdelitve[,c('izvoz_mio','uvoz_mio')],1,minus) 
-  )
-
-NETO_RAZDELITVE<-NETO_RAZDELITVE %>% 
-  mutate(
-    obrt=apply(razdelitve[,c('izvoz_mio','uvoz_mio')],1,plus) 
-  )
 
 
 #neto izvoz v milionih zemjevid
@@ -32,41 +13,40 @@ NETO_RAZDELITVE<-NETO_RAZDELITVE %>%
                                "ne_50m_admin_0_countries",mapa="./zemljevidi") %>% fortify()
   
   #da se imena ujemajo
-  NETO_TRGOVSKE$Drzave <-standardize.countrynames(NETO_TRGOVSKE$Drzave, suggest = "auto", print.changes = FALSE)
+  TRGOVSKE_PARTNERJE$Drzave <-standardize.countrynames(TRGOVSKE_PARTNERJE$Drzave, suggest = "auto", print.changes = FALSE)
   
   zemljevid$SOVEREIGNT <-standardize.countrynames(zemljevid$SOVEREIGNT, suggest = "auto", print.changes = FALSE)
   #napaka in razlike v razpredelnici
   
-  NETO_TRGOVSKE$Drzave[NETO_TRGOVSKE$Drzave=="Lithuana"] <-"Lithuania"
-  NETO_TRGOVSKE$Drzave[NETO_TRGOVSKE$Drzave=="Bangladesch"] <-"Bangladesh"
-  NETO_TRGOVSKE$Drzave[NETO_TRGOVSKE$Drzave=="New Zeeland"] <-"New Zealand"
-  
-
-  plot_data <- NETO_TRGOVSKE %>% 
-    group_by(Drzave) %>% 
-    summarise(neto_izvoz=sum(neto_izvoz,na.rm=TRUE)) %>%
+  TRGOVSKE_PARTNERJE$Drzave[TRGOVSKE_PARTNERJE$Drzave=="Lithuana"] <-"Lithuania"
+  TRGOVSKE_PARTNERJE$Drzave[TRGOVSKE_PARTNERJE$Drzave=="Bangladesch"] <-"Bangladesh"
+  TRGOVSKE_PARTNERJE$Drzave[TRGOVSKE_PARTNERJE$Drzave=="New Zeeland"] <-"New Zealand"
+  TRGOVSKE_PARTNERJE$Drzave[TRGOVSKE_PARTNERJE$Drzave=="Czech Republic"] <-"Czechia"
+  plot_data <- TRGOVSKE_PARTNERJE %>% filter(Podatek == "Neto izvoz") %>%
     left_join(zemljevid, ., by=c("SOVEREIGNT"="Drzave"))
   
   zemljevid_neto_izvoz <- 
-    ggplot(plot_data, aes(x=long, y=lat, group=group, fill=`neto_izvoz`/1e6)) + 
-    geom_polygon(data=, size=0.1,color = "white") +
-    labs(x="", y="", fill="Izvoz - Uvoz", title = "neto izvoz  v milionih") + 
-    theme_map(base_size = 10) +
-    theme(legend.position = "right")+
-    scale_fill_continuous(label=comma)+
-    scale_fill_gradient(low="red3",high="yellow")
+    ggplot(plot_data, aes(x=long, y=lat, group=group, fill=Vrednost/1e6)) + 
+    geom_polygon(size=0.1, color="white") +
+    labs(x="", y="", fill="Izvoz - Uvoz", title="Neto izvoz v milijonih") + 
+    theme_map(base_size=10) +
+    theme(legend.position="right") +
+    scale_fill_gradient(low="red3", high="yellow")
+  
     
     
      
   
    
   
- plot1<-plot(zemljevid_neto_izvoz)
+ plot(zemljevid_neto_izvoz)
  
  
  
  #bubble aminimated zemjevid
- skupaj<-left_join(BDP,pdf,by=c("Leti"="leto"))
+ 
+ pdf1 <-pdf %>%pivot_wider( names_from = "Podatek",values_from = "Vrednost")
+ skupaj<-left_join(BDP,pdf1,by=c("Leti"="leto"))
  skupaj$Leti<-as.numeric(skupaj$Leti)
  
 
@@ -96,10 +76,10 @@ NETO_RAZDELITVE<-NETO_RAZDELITVE %>%
  
  
  #uvoz po klasifikacije pita
+ razdelitve1 <-razdelitve %>%pivot_wider( names_from = "Podatek",values_from = "Vrednost")
  
- 
- slices <- c(NETO_RAZDELITVE$uvoz_mio)
- lbls <- c(NETO_RAZDELITVE$`opis blaga`)
+ slices <- c(razdelitve1$uvoz_mio)
+ lbls <- c(razdelitve1$`opis blaga`)
  pct <- round(slices/sum(slices)*100)
  pct1 <- paste(pct,"%",sep="")
  lbls <- paste(lbls, pct) # dodaj odstotke na labels 
@@ -108,15 +88,15 @@ NETO_RAZDELITVE<-NETO_RAZDELITVE %>%
 
  
  
- pie(slices, col=rainbow(length(lbls)),
+ pie_uvoz<-pie(slices, col=rainbow(length(lbls)),
      main="uvoz po razdelitve",clockwise=TRUE,cex=0.5,labels=pct1)
- legend("right", inset=c(-0.9,0),cex=0.5,legend =unique(lbls), bty="n",fill=rainbow(length(lbls)))
+ legend("right", inset=c(-0.95,0),cex=0.5,legend =unique(lbls), bty="n",fill=rainbow(length(lbls)))
  
- #izovoz po klasifikacije
+ #izvoz po klasifikacije
  
  
- slices <- c(NETO_RAZDELITVE$izvoz_mio)
- lbls <- c(NETO_RAZDELITVE$`opis blaga`)
+ slices <- c(razdelitve1$izvoz_mio)
+ lbls <- c(razdelitve1$`opis blaga`)
  pct <- round(slices/sum(slices)*100)
  pct1 <- paste(pct,"%",sep="")
  lbls <- paste(lbls, pct) # dodaj odstotke na labels 
@@ -125,9 +105,9 @@ NETO_RAZDELITVE<-NETO_RAZDELITVE %>%
  
  
  
- pie(slices, col=rainbow(length(lbls)),
+ pie_izvoz<-pie(slices, col=rainbow(length(lbls)),
      main="izvoz po razdelitve",clockwise=TRUE,cex=0.5,labels=pct1)
- legend("right", inset=c(-0.9,0),cex=0.5,legend =unique(lbls), bty="n",fill=rainbow(length(lbls)))
+ legend("right", inset=c(-0.95,0),cex=0.5,legend =unique(lbls), bty="n",fill=rainbow(length(lbls)))
  
  
  #
