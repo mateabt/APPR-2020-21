@@ -38,12 +38,12 @@ source("uvoz/uvoz.r", encoding="UTF-8")
 
 Uvozila sem podatke o Nemškem trgovinu v obliki xlsx s statističnega urada Nemčije ter v obliki HTML in PDF datoteke. Podatke sem prečistila in dala v treh razpredelnicah v obliki *tidy data*.
 
-1. `Trgovinski_partnerji` - podatki o Nemških trgovskih partnerjev
+1. `TRGOVSKE_PARTNERJE` - podatki o Nemških trgovskih partnerjev
   - `Drzave` -spremenljivka: trgovske partnerje
   - `Uvoz` - spremenljivka: ime države iz katere Nemčija uvaža (besedilo),
   - `Izvoz` - spremenljivka:ime države iz katere Nemčija uvaža (besedilo),
   - `Neto izvoz` - spremenljivka: Izvoz minus uvoz za države (besedilo).
-  - `Vrednost` - metitev:količino prej naštetih spremenljivk
+  - `Vrednost` - metitev:količino prej naštetih spremenljivk(število)
   
 2. `obcine` - podatki o občinah
   - `obcina` - spremenljivka: ime občine (neurejen faktor),
