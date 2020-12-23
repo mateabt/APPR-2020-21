@@ -43,7 +43,7 @@ Uvozila sem podatke o Nemškem trgovinu v obliki xlsx s statističnega urada Nem
   - `Uvoz` - spremenljivka: ime države iz katere Nemčija uvaža (besedilo),
   - `Izvoz` - spremenljivka:ime države iz katere Nemčija uvaža (besedilo),
   - `Neto izvoz` - spremenljivka: Izvoz minus uvoz za države (besedilo).
-  - `Vrednost` - metitev:
+  - `Vrednost` - metitev:količino prej naštetih spremenljivk
   
 2. `obcine` - podatki o občinah
   - `obcina` - spremenljivka: ime občine (neurejen faktor),
