@@ -35,11 +35,6 @@
   
     
     
-     
-  
-   
-  
- plot(zemljevid_neto_izvoz)
  
  
  
@@ -69,13 +64,14 @@
  
  
  renderer = gifski_renderer() 
- animate(p, renderer = gifski_renderer())
+ animacija<-animate(p, renderer = gifski_renderer())
 
  
  
  
  
  #uvoz po klasifikacije pita
+ 
  razdelitve1 <-razdelitve %>%pivot_wider( names_from = "Podatek",values_from = "Vrednost")
  
  slices <- c(razdelitve1$uvoz_mio)
@@ -91,6 +87,11 @@
  pie_uvoz<-pie(slices, col=rainbow(length(lbls)),
      main="uvoz po razdelitve",clockwise=TRUE,cex=0.5,labels=pct1)
  legend("right", inset=c(-0.95,0),cex=0.5,legend =unique(lbls), bty="n",fill=rainbow(length(lbls)))
+ 
+ 
+ 
+ 
+ 
  
  #izvoz po klasifikacije
  
@@ -110,4 +111,46 @@
  legend("right", inset=c(-0.95,0),cex=0.5,legend =unique(lbls), bty="n",fill=rainbow(length(lbls)))
  
  
- #
+ 
+ 
+ 
+ #Uvoz in izvoz 2019
+ U<-filter(pdf, leto == 2019, Podatek == "uvoz")
+ I<-filter(pdf, leto == 2019, Podatek == "izvoz")
+
+ 
+ data <- rbind(U,I)
+ 
+ data[,1]<-NULL
+ 
+ # izracun odtstotka
+ data$odstotek <- data$Vrednost / sum(data$Vrednost)
+ #preracun za pozicije legende
+ data$ymax <- cumsum(data$odstotek)
+ data$ymin <- c(0, head(data$ymax, n=-1))
+ 
+ # pozicija legende
+ data$pozicija <- (data$ymax + data$ymin) / 2
+ 
+ # labe;
+ data$label <- paste0(data$Podatek, "\n Vrednost v % ", round(data$odstotek,2)*100)
+ 
+ # plot
+ graf4<-ggplot(data, aes(ymax=ymax, ymin=ymin, xmax=4, xmin=3, fill=Vrednost)) +
+   geom_rect() +
+   coord_polar(theta="y") + # Try to remove that to understand how the chart is built initially
+   xlim(c(2, 4))+
+   theme_void() +
+   theme(legend.position = "none")+
+   scale_fill_gradient(low="red", high="yellow")+
+   geom_label( x=3.5, aes(y=pozicija, label=label), size=4)+
+   ggtitle("Trgovina leta 2019",)+
+   theme(
+     plot.title = element_text(hjust = 0.5, size = 20))
+   
+   
+ 
+ 
+
+ 
+ 
