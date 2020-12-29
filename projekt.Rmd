@@ -94,20 +94,11 @@ Opazimo narasčajoči trend izvoza ter uvoza.Tudi razmik med izvozom in uvozom s
 Edina odstapka od tistega sklepa opazimo v času krize ko so se izvoz ter uvoz zmanjšali kot 
 posledica polabšanih gospodarskih razmer(negotovost,manjše povpraševanje itn.)
 
-***
-```{r, figures-side, fig.show="hold", out.width="50%"}
- pie(slices, col=rainbow(length(lbls)),
-    main="izvoz po razdelitve",clockwise=TRUE,cex=0.5,labels=pct1)
 
- pie_uvoz<-pie(slices, col=rainbow(length(lbls)),
-     main="uvoz po razdelitve",clockwise=TRUE,cex=0.5,labels=pct1)
-     
- 
-```
 
 ***
 ```{r shiny, echo=FALSE}
-shinyAppDir("shiny", options=list(width="105%", height=730))
+shinyAppDir("shiny", options=list(width="100%", height=750))
 ```
 
 

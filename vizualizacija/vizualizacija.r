@@ -67,47 +67,11 @@
  
  
  
- #uvoz po klasifikacije pita
+ #lazji racun
  
  razdelitve1 <-razdelitve %>%pivot_wider( names_from = "Podatek",values_from = "Vrednost v milionih")
  
- slices <- c(razdelitve1$uvoz)
- lbls <- c(razdelitve1$`opis blaga`)
- pct <- round(slices/sum(slices)*100)
- pct1 <- paste(pct,"%",sep="")
- lbls <- paste(lbls, pct) # dodaj odstotke na labels 
- lbls <- paste(lbls,"%",sep="") # doda znak % 
- par(mai = c(0,0,1,3))
 
- 
- 
- pie(slices, col=rainbow(length(lbls)),
-     main="uvoz po razdelitve",clockwise=TRUE,cex=0.5,labels=pct1)
- legend("right", inset=c(-0.95,0),cex=0.5,legend =unique(lbls), bty="n",fill=rainbow(length(lbls)))
- 
-
- 
- 
- 
- 
- #izvoz po klasifikacije
- 
- 
- slices <- c(razdelitve1$izvoz)
- lbls <- c(razdelitve1$`opis blaga`)
- pct <- round(slices/sum(slices)*100)
- pct1 <- paste(pct,"%",sep="")
- lbls <- paste(lbls, pct) # dodaj odstotke na labels 
- lbls <- paste(lbls,"%",sep="") # doda znak % 
- par(mai = c(0,0,1,3))
- 
- 
- 
- pie(slices, col=rainbow(length(lbls)),
-     main="izvoz po razdelitve",clockwise=TRUE,cex=0.5,labels=pct1)
- legend("right", inset=c(-0.95,0),cex=0.5,legend =unique(lbls), bty="n",fill=rainbow(length(lbls)))
- 
- 
  
  
  
@@ -157,7 +121,7 @@ stolpicni_uvoz<-graf5+xlab("panoge")
 #geom_plot za izovz po razdelitve
 graf6<-ggplot(data=razdelitve1, aes(x=reorder(`opis blaga`,izvoz), y=izvoz)) +
   geom_bar(stat="identity", fill="darkorange2")+ coord_flip()+theme_minimal()+
-  geom_text(aes(label=uvoz),size=3.5,hjust=-0.5,position = position_dodge(width = 0.5))
+  geom_text(aes(label=uvoz),size=3.5,hjust=-0.5,position = position_dodge(width = ))
 
 stolpicni_izvoz<-graf6+xlab("panoge")
  
