@@ -81,11 +81,11 @@
 
  
  
- #pie_uvoz<-pie(slices, col=rainbow(length(lbls)),
-#     main="uvoz po razdelitve",clockwise=TRUE,cex=0.5,labels=pct1)
-# legend("right", inset=c(-0.95,0),cex=0.5,legend =unique(lbls), bty="n",fill=rainbow(length(lbls)))
+ pie(slices, col=rainbow(length(lbls)),
+     main="uvoz po razdelitve",clockwise=TRUE,cex=0.5,labels=pct1)
+ legend("right", inset=c(-0.95,0),cex=0.5,legend =unique(lbls), bty="n",fill=rainbow(length(lbls)))
  
- 
+
  
  
  
@@ -103,9 +103,9 @@
  
  
  
- #pie_izvoz<-pie(slices, col=rainbow(length(lbls)),
- #    main="izvoz po razdelitve",clockwise=TRUE,cex=0.5,labels=pct1)
- #legend("right", inset=c(-0.95,0),cex=0.5,legend =unique(lbls), bty="n",fill=rainbow(length(lbls)))
+ pie(slices, col=rainbow(length(lbls)),
+     main="izvoz po razdelitve",clockwise=TRUE,cex=0.5,labels=pct1)
+ legend("right", inset=c(-0.95,0),cex=0.5,legend =unique(lbls), bty="n",fill=rainbow(length(lbls)))
  
  
  
@@ -151,15 +151,15 @@
 
 graf5<-ggplot(data=razdelitve1, aes(x=reorder(`opis blaga`,uvoz), y=uvoz)) +
   geom_bar(stat="identity", fill="darkorange2")+ coord_flip()+theme_minimal()+
-  geom_text(aes(label=uvoz), vjust=-0.3, size=3.5)
+  geom_text(aes(label=uvoz), size=3.5)
 
-graf5
+stolpicni_uvoz<-graf5+xlab("panoge")
 #geom_plot za izovz po razdelitve
 graf6<-ggplot(data=razdelitve1, aes(x=reorder(`opis blaga`,izvoz), y=izvoz)) +
   geom_bar(stat="identity", fill="darkorange2")+ coord_flip()+theme_minimal()+
-  geom_text(aes(label=uvoz), vjust=-0.3, size=3.5)
+  geom_text(aes(label=uvoz), size=3.5)
 
-graf6
+stolpicni_izvoz<-graf6+xlab("panoge")
  
 
  

@@ -1,17 +1,13 @@
-library(shiny)
 
-shinyUI(fluidPage(
-  
-  titlePanel("Slovenske občine"),
-  
-  tabsetPanel(
-      tabPanel("Velikost družine",
-               DT::dataTableOutput("druzine")),
-      
-      tabPanel("Število naselij",
-               sidebarPanel(
-                  uiOutput("pokrajine")
-                ),
-               mainPanel(plotOutput("naselja")))
-    )
-))
+
+ui <- pageWithSidebar(
+  headerPanel("Nemška trgovina klasificirana po panoge"),
+  sidebarPanel(
+    uiOutput("filter_degree")
+    
+  ),
+  mainPanel(
+    uiOutput('plot')
+    
+  )
+)

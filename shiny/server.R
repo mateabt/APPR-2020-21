@@ -1,24 +1,39 @@
 library(shiny)
+library(gridExtra)
 
-shinyServer(function(input, output) {
-  output$druzine <- DT::renderDataTable({
-    druzine %>% pivot_wider(names_from="velikost.druzine", values_from="stevilo.druzin") %>%
-      rename(`Občina`=obcina)
+
+server <- function(input, output, session) {
+  output$filter_degree<-renderUI({
+    radioButtons("rd","Select Option",choices = c("tortni","stolpične",'razpredelnice'),
+                 selected = "tortni")
   })
   
-  output$pokrajine <- renderUI(
-    selectInput("pokrajina", label="Izberi pokrajino",
-                choices=c("Vse", levels(obcine$pokrajina)))
-  )
-  output$naselja <- renderPlot({
-    main <- "Pogostost števila naselij"
-    if (!is.null(input$pokrajina) && input$pokrajina %in% levels(obcine$pokrajina)) {
-      t <- obcine %>% filter(pokrajina == input$pokrajina)
-      main <- paste(main, "v regiji", input$pokrajina)
-    } else {
-      t <- obcine
+  
+  output$plot <- renderUI({
+    if(input$rd=="stolpične"){
+      output$plot1<-renderPlot({
+        ptlist<-list(stolpicni_izvoz,stolpicni_uvoz)
+        grid.arrange(grobs=ptlist)
+      })
+      plotOutput("plot1", height = 650)
     }
-    ggplot(t, aes(x=naselja)) + geom_histogram() +
-      ggtitle(main) + xlab("Število naselij") + ylab("Število občin")
+    
+    
+    else if(input$rd=="tortni"){
+      output$plot2<-renderUI({
+        
+      })
+      plotlyOutput("plot2")
+    }
+    
+    
+    else if(input$rd=="razpredelnice"){
+      
+      output$tbl =renderDataTable(razdelitve1)
+      
+      dataTableOutput("tbl")
+    }
+    
   })
-})
+  
+}
