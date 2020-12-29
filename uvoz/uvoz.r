@@ -63,8 +63,8 @@ UVOZ_RAZDELITVE<- function() {
       tabela$Division <- NULL
       tabela<-tabela[-c(1,2,33),]
       
-      colnames(tabela) <- c("opis blaga","izvoz_mio","uvoz_mio")
-      for (col in c("izvoz_mio","uvoz_mio")) {
+      colnames(tabela) <- c("opis blaga","izvoz","uvoz")
+      for (col in c("izvoz","uvoz")) {
         if (is.character(tabela[[col]])) {
           tabela[[col]] <- parse_number(tabela[[col]], na="-", locale=sl)
         }
@@ -75,16 +75,16 @@ UVOZ_RAZDELITVE<- function() {
       
       NETO_RAZDELITVE<-tabela %>% 
         mutate(
-          neto_izvoz=apply(tabela[,c('izvoz_mio','uvoz_mio')],1,minus) 
+          'neto izvoz'=apply(tabela[,c('izvoz','uvoz')],1,minus) 
         )
       
       NETO_RAZDELITVE<-NETO_RAZDELITVE %>% 
         mutate(
-          obrt=apply(tabela[,c('izvoz_mio','uvoz_mio')],1,plus) 
+          obrt=apply(tabela[,c('izvoz','uvoz')],1,plus) 
         )
       
       NETO_RAZDELITVE <- NETO_RAZDELITVE %>% 
-        pivot_longer(-`opis blaga`, names_to="Podatek", values_to="Vrednost")
+        pivot_longer(-`opis blaga`, names_to="Podatek", values_to="Vrednost v milionih")
       
       
       
@@ -151,11 +151,11 @@ Uvoz_pdf<-function(){
       obrt=apply(PDF_uvoz[,c('izvoz','uvoz')],1,plus) 
     )
   
-
+ pdf$leto <- as.numeric(pdf$leto)
  
   
   pdf<-pdf%>% 
-    pivot_longer(-leto, names_to="Podatek", values_to="Vrednost")
+    pivot_longer(-leto, names_to="Podatek", values_to="Vrednost v milionih")
   return(pdf)
 }
 
@@ -170,6 +170,7 @@ pdf<-Uvoz_pdf()
 UVOZ_BDP <- function(){
   uvoz <-read_xlsx("podatki/GDP.xlsx")
   colnames(uvoz)<-c("Leti","BDP")
+  uvoz$Leti<-as.numeric(uvoz$Leti)
   return(uvoz)
 }
 

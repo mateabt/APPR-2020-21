@@ -35,12 +35,9 @@
   
     
     
- 
- 
- 
  #bubble aminimated zemjevid
  
- pdf1 <-pdf %>%pivot_wider( names_from = "Podatek",values_from = "Vrednost")
+ pdf1 <-pdf %>%pivot_wider( names_from = "Podatek",values_from = "Vrednost v milionih")
  skupaj<-left_join(BDP,pdf1,by=c("Leti"="leto"))
  skupaj$Leti<-as.numeric(skupaj$Leti)
  
@@ -63,7 +60,7 @@
  
  
  
- renderer = gifski_renderer() 
+ #renderer = gifski_renderer() 
  animacija<-animate(p, renderer = gifski_renderer())
 
  
@@ -72,9 +69,9 @@
  
  #uvoz po klasifikacije pita
  
- razdelitve1 <-razdelitve %>%pivot_wider( names_from = "Podatek",values_from = "Vrednost")
+ razdelitve1 <-razdelitve %>%pivot_wider( names_from = "Podatek",values_from = "Vrednost v milionih")
  
- slices <- c(razdelitve1$uvoz_mio)
+ slices <- c(razdelitve1$uvoz)
  lbls <- c(razdelitve1$`opis blaga`)
  pct <- round(slices/sum(slices)*100)
  pct1 <- paste(pct,"%",sep="")
@@ -84,9 +81,9 @@
 
  
  
- pie_uvoz<-pie(slices, col=rainbow(length(lbls)),
-     main="uvoz po razdelitve",clockwise=TRUE,cex=0.5,labels=pct1)
- legend("right", inset=c(-0.95,0),cex=0.5,legend =unique(lbls), bty="n",fill=rainbow(length(lbls)))
+ #pie_uvoz<-pie(slices, col=rainbow(length(lbls)),
+#     main="uvoz po razdelitve",clockwise=TRUE,cex=0.5,labels=pct1)
+# legend("right", inset=c(-0.95,0),cex=0.5,legend =unique(lbls), bty="n",fill=rainbow(length(lbls)))
  
  
  
@@ -96,7 +93,7 @@
  #izvoz po klasifikacije
  
  
- slices <- c(razdelitve1$izvoz_mio)
+ slices <- c(razdelitve1$izvoz)
  lbls <- c(razdelitve1$`opis blaga`)
  pct <- round(slices/sum(slices)*100)
  pct1 <- paste(pct,"%",sep="")
@@ -106,9 +103,9 @@
  
  
  
- pie_izvoz<-pie(slices, col=rainbow(length(lbls)),
-     main="izvoz po razdelitve",clockwise=TRUE,cex=0.5,labels=pct1)
- legend("right", inset=c(-0.95,0),cex=0.5,legend =unique(lbls), bty="n",fill=rainbow(length(lbls)))
+ #pie_izvoz<-pie(slices, col=rainbow(length(lbls)),
+ #    main="izvoz po razdelitve",clockwise=TRUE,cex=0.5,labels=pct1)
+ #legend("right", inset=c(-0.95,0),cex=0.5,legend =unique(lbls), bty="n",fill=rainbow(length(lbls)))
  
  
  
@@ -117,14 +114,14 @@
  #Uvoz in izvoz 2019
  U<-filter(pdf, leto == 2019, Podatek == "uvoz")
  I<-filter(pdf, leto == 2019, Podatek == "izvoz")
-
+ 
  
  data <- rbind(U,I)
  
  data[,1]<-NULL
  
  # izracun odtstotka
- data$odstotek <- data$Vrednost / sum(data$Vrednost)
+ data$odstotek <- data$`Vrednost v milionih` / sum(data$`Vrednost v milionih`)
  #preracun za pozicije legende
  data$ymax <- cumsum(data$odstotek)
  data$ymin <- c(0, head(data$ymax, n=-1))
@@ -132,25 +129,25 @@
  # pozicija legende
  data$pozicija <- (data$ymax + data$ymin) / 2
  
- # labe;
+ # label
  data$label <- paste0(data$Podatek, "\n Vrednost v % ", round(data$odstotek,2)*100)
  
  # plot
- graf4<-ggplot(data, aes(ymax=ymax, ymin=ymin, xmax=4, xmin=3, fill=Vrednost)) +
+ graf4<-ggplot(data, aes(ymax=ymax, ymin=ymin, xmax=4, xmin=3, fill=`Vrednost v milionih`)) +
    geom_rect() +
-   coord_polar(theta="y") + # Try to remove that to understand how the chart is built initially
+   coord_polar(theta="y") + 
    xlim(c(2, 4))+
    theme_void() +
    theme(legend.position = "none")+
-   scale_fill_gradient(low="red", high="yellow")+
+   scale_fill_gradient(low="darkorange2", high="yellow")+
    geom_label( x=3.5, aes(y=pozicija, label=label), size=4)+
    ggtitle("Trgovina leta 2019",)+
    theme(
      plot.title = element_text(hjust = 0.5, size = 20))
-   
-   
  
  
 
+
  
+
  
