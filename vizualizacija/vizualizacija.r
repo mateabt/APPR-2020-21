@@ -147,6 +147,14 @@
  
  
 
+ #geom_plot za uvoz po razdelitve
+
+razdelitve1<-razdelitve1 %>% arrange(desc(uvoz))
+graf5<-ggplot(data=razdelitve1, aes(x=`opis blaga`, y=uvoz)) +
+  geom_bar(stat="identity", fill="darkorange2")+ coord_flip()+theme_minimal()+
+  geom_text(aes(label=uvoz), vjust=-0.3, size=3.5)
+
+graf5
 
  
 
