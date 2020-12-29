@@ -151,13 +151,13 @@
 
 graf5<-ggplot(data=razdelitve1, aes(x=reorder(`opis blaga`,uvoz), y=uvoz)) +
   geom_bar(stat="identity", fill="darkorange2")+ coord_flip()+theme_minimal()+
-  geom_text(aes(label=uvoz), size=3.5)
+  geom_text(aes(label=uvoz), size=3.5,hjust=-0.5,position = position_dodge(width = 1))
 
 stolpicni_uvoz<-graf5+xlab("panoge")
 #geom_plot za izovz po razdelitve
 graf6<-ggplot(data=razdelitve1, aes(x=reorder(`opis blaga`,izvoz), y=izvoz)) +
   geom_bar(stat="identity", fill="darkorange2")+ coord_flip()+theme_minimal()+
-  geom_text(aes(label=uvoz), size=3.5)
+  geom_text(aes(label=uvoz),size=3.5,hjust=-0.5,position = position_dodge(width = 0.5))
 
 stolpicni_izvoz<-graf6+xlab("panoge")
  
