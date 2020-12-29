@@ -105,7 +105,10 @@ posledica polabšanih gospodarskih razmer(negotovost,manjše povpraševanje itn.
  
 ```
 
-
+***
+```{r shiny, echo=FALSE}
+shinyAppDir("shiny", options=list(width="105%", height=730))
+```
 
 
 

@@ -4,7 +4,7 @@ library(gridExtra)
 
 server <- function(input, output, session) {
   output$filter_degree<-renderUI({
-    radioButtons("rd","Select Option",choices = c("tortni","stolpične",'razpredelnice'),
+    radioButtons("rd","Izberi ",choices = c("tortni","stolpične",'razpredelnice'),
                  selected = "tortni")
   })
   
@@ -20,10 +20,22 @@ server <- function(input, output, session) {
     
     
     else if(input$rd=="tortni"){
-      output$plot2<-renderUI({
+      output$plot2<-renderPlot({
+        slices <- c(razdelitve1$izvoz)
+        lbls <- c(razdelitve1$`opis blaga`)
+        pct <- round(slices/sum(slices)*100)
+        pct1 <- paste(pct,"%",sep="")
+        lbls <- paste(lbls, pct) # dodaj odstotke na labels 
+        lbls <- paste(lbls,"%",sep="") # doda znak % 
+        par(mai = c(0,0,1,3))
         
+        
+        
+        pie(slices, col=rainbow(length(lbls)),
+            main="izvoz po razdelitve",clockwise=TRUE,cex=0.5,labels=pct1)
+            legend("right", inset=c(-0.95,0),cex=0.5,legend =unique(lbls), bty="n",fill=rainbow(length(lbls)))
       })
-      plotlyOutput("plot2")
+      
     }
     
     
