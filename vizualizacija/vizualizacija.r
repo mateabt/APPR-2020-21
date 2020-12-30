@@ -111,19 +111,29 @@
  
  
 
- #geom_plot za uvoz po razdelitve
+ #geom_bar za uvoz po razdelitve
 
 graf5<-ggplot(data=razdelitve1, aes(x=reorder(`opis blaga`,uvoz), y=uvoz)) +
   geom_bar(stat="identity", fill="darkorange2")+ coord_flip()+theme_minimal()+
-  geom_text(aes(label=uvoz), size=3.5,hjust=-0.5,position = position_dodge(width = 1))
+  geom_text(aes(label=uvoz), size=3.5,hjust=0.5,position = position_dodge(width = 1))
 
 stolpicni_uvoz<-graf5+xlab("panoge")
-#geom_plot za izovz po razdelitve
+#geom_bar za izovz po razdelitve
 graf6<-ggplot(data=razdelitve1, aes(x=reorder(`opis blaga`,izvoz), y=izvoz)) +
   geom_bar(stat="identity", fill="darkorange2")+ coord_flip()+theme_minimal()+
-  geom_text(aes(label=uvoz),size=3.5,hjust=-0.5,position = position_dodge(width = ))
+  geom_text(aes(label=uvoz),size=3.5,hjust=0.5,position = position_dodge(width = ))
 
 stolpicni_izvoz<-graf6+xlab("panoge")
+
+
+# pie izvoz
+slices <- c(razdelitve1$izvoz)
+lbls <- c(razdelitve1$`opis blaga`)
+pct <- round(slices/sum(slices)*100)
+pct1 <- paste(pct,"%",sep="")
+lbls <- paste(lbls, pct) # dodaj odstotke na labels 
+lbls <- paste(lbls,"%",sep="") # doda znak % 
+par(mai = c(0,0,1,3))
  
 
  

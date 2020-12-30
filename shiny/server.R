@@ -21,13 +21,7 @@ server <- function(input, output, session) {
     
     else if(input$rd=="tortni"){
       output$plot2<-renderPlot({
-        slices <- c(razdelitve1$izvoz)
-        lbls <- c(razdelitve1$`opis blaga`)
-        pct <- round(slices/sum(slices)*100)
-        pct1 <- paste(pct,"%",sep="")
-        lbls <- paste(lbls, pct) # dodaj odstotke na labels 
-        lbls <- paste(lbls,"%",sep="") # doda znak % 
-        par(mai = c(0,0,1,3))
+        
         
         
         
