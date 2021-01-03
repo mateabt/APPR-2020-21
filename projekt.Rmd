@@ -114,7 +114,8 @@ graf7
 ```
 
 iz `graf2` lahko opazimo da se je BDP(rdeča) gibal v skladu z neto izvozom torej
-v skladu z makroekonomsko analizo 
+v skladu z makroekonomsko analizo.Opazimo pad leta 2009 kot rezultat Ameriške 
+krize ki se je prelila tudi v Evropi  z mejhni zamik
 
 ***
 ```{r shiny2, echo=FALSE}
