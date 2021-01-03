@@ -6,7 +6,7 @@ server <- function(input, output, session) {
     output$filter_degree<-renderUI({
         selectInput("rd","Izberi zeleno geografsko podrocje ",
                     choices = c("Svet","Evropa","Afrika","Južna Amerika","Severna Amerika",
-                                "Avstralija in Oceanija","Azija" ),
+                                "Avstralija in Oceanija","Azija","Antarktika" ),
                      selected = NULL)
     })
     
@@ -72,13 +72,24 @@ server <- function(input, output, session) {
         
         else if(input$rd=="Azija"){
             
-            output$plot6<-renderPlot({
+            output$plot7<-renderPlot({
                 ptlist<-list(zemljevid_azija_izvoz,zemljevid_azija_uvoz)
                 grid.arrange(grobs=ptlist)
             })
-            plotOutput("plot6", height = 650)
+            plotOutput("plot7", height = 650)
             
         }
+        
+        else if(input$rd=="Antarktika"){
+            
+            output$plot8<-renderPlot({
+                ptlist<-list(zemljevid_antarktika_izvoz,zemljevid_antarktika_uvoz)
+                grid.arrange(grobs=ptlist)
+            })
+            plotOutput("plot8", height = 650)
+            
+        }
+        
         
     })
     
