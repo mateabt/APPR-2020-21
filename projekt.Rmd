@@ -109,7 +109,7 @@ med sabo.
 graf7
 ```
 
-iz `graf7` lahko opazimo da se je BDP(rdeča) gibal v skladu z neto izvozom 
+iz `graf2` lahko opazimo da se je BDP(rdeča) gibal v skladu z neto izvozom 
 
 ***
 ***
