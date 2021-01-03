@@ -135,3 +135,35 @@ graf7<-ggplot(df, aes(leto)) +
   geom_bar(aes(y=neto_izvoz), fill="yellow",color="black",stat="identity") +ylab("vrednost v milionih")+  
   geom_line(aes(y=BDP), colour="red") +scale_y_continuous(labels=scales::comma)+theme_minimal()
   
+
+
+
+
+#Izvoz EU
+plot_data1 <- TRGOVSKE_PARTNERJE %>% filter(Podatek == "Izvoz")
+
+zemljevid_evropa_izvoz <- ggplot() + 
+  geom_polygon(data=left_join(zemljevid %>% filter(CONTINENT=="Europe"),plot_data1, by=c("SOVEREIGNT"="Drzave")),
+               aes(x=long, y=lat, group=group, fill=Vrednost/1e6), size=0.1) +
+  labs(x="", y="", fill="Izvoz") +   
+  ggtitle("Količina izvoza v Evropi") +
+  coord_cartesian(xlim=c(-27, 50), ylim=c(25, 80), expand = TRUE)  +
+  theme_map(base_size = 20)+
+  scale_fill_gradient(low="red3", high="yellow")
+
+#Uvoz EU
+  
+plot_data2 <- TRGOVSKE_PARTNERJE %>% filter(Podatek == "Uvoz")
+
+zemljevid_evropa_uvoz <- ggplot() + 
+  geom_polygon(data=left_join(zemljevid %>% filter(CONTINENT=="Europe"),plot_data2, by=c("SOVEREIGNT"="Drzave")),
+               aes(x=long, y=lat, group=group, fill=Vrednost/1e6), size=0.1) +
+  labs(x="", y="", fill="Uvoz") +   
+  ggtitle("Količina uvoza v Evropi") +
+  coord_cartesian(xlim=c(-27, 50), ylim=c(25, 80), expand = TRUE)  +
+  theme_map(base_size = 20)+
+  scale_fill_gradient(low="red3", high="yellow")
+
+
+               
+      
