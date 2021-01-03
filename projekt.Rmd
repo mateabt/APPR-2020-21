@@ -111,9 +111,14 @@ graf7
 iz `graf2` lahko opazimo da se je BDP(rdeča) gibal v skladu z neto izvozom 
 
 ***
-***
 ```{r shiny2, echo=FALSE}
 shinyAppDir("shiny2", options=list(width="110%", height=750))
 ```
 
 Na te slike lahko detalno pogledamo izvoz in uvoz na različne kontinente.
+
+***
+# Napredna analiza podatkov
+
+
+
