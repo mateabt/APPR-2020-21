@@ -165,7 +165,7 @@ pdf<-Uvoz_pdf()
 
 
 
-# BDP po leti of 1991 
+# BDP po leti of 1991 nominalna cena baza 2010 v milionih
 
 UVOZ_BDP <- function(){
   uvoz <-read_xlsx("podatki/GDP.xlsx")

@@ -134,6 +134,11 @@ pct1 <- paste(pct,"%",sep="")
 lbls <- paste(lbls, pct) # dodaj odstotke na labels 
 lbls <- paste(lbls,"%",sep="") # doda znak % 
 par(mai = c(0,0,1,3))
- 
 
- 
+
+#bar_plot + liniski graf za neto izvoz po letih in bdp
+df<-left_join(pdf1[pdf1$leto>=1991,],BDP, by=c("leto"="Leti"))
+graf7<-ggplot(df, aes(leto)) +
+  geom_bar(aes(y=neto_izvoz), fill="yellow",color="black",stat="identity") +ylab("vrednost v milionih")+  
+  geom_line(aes(y=BDP), colour="red") +scale_y_continuous(labels=scales::comma)+theme_minimal()
+  

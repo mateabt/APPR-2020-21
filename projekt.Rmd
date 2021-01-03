@@ -100,7 +100,10 @@ posledica polabšanih gospodarskih razmer(negotovost,manjše povpraševanje itn.
 ```{r shiny, echo=FALSE}
 shinyAppDir("shiny", options=list(width="110%", height=750))
 ```
+Največji izvoz opazimo v gozdarstvu.Uvoz pa je v letu 2019  bil največji pri ribe in ribne produkte,vendar pa če bi pogledali neto izvoz v tabeli vidimo da je tisti največji bil pri kovinske rude
 
-
-
-
+***
+```{r BDP_neto, echo=FALSE, fig.align='center', warning=FALSE, fig.cap='Graf 2'}
+graf7
+```
+iz `graf7` lahko opazimo da se je BDP(rdeča) gibal v skladu z neto izvozom 
