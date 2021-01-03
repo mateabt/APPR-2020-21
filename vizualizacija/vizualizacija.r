@@ -240,3 +240,28 @@ zemljevid_juznaamerika_uvoz <- ggplot() +
   coord_cartesian(xlim = c(-85, -35), ylim=c(-55,12), expand = TRUE)  +
   theme_map(base_size = 20)+
   scale_fill_gradient(low="red3", high="yellow")
+
+
+#Severna Amerika izvoz
+plot_data2 <- TRGOVSKE_PARTNERJE %>% filter(Podatek == "Izvoz")
+
+zemljevid_severnaamerika_izvoz <- ggplot() + 
+  geom_polygon(data=left_join(zemljevid %>% filter(CONTINENT=="North America"),plot_data2, by=c("SOVEREIGNT"="Drzave")),
+               aes(x=long, y=lat, group=group, fill=Vrednost/1e6), size=0.1) +
+  labs(x="", y="", fill="Izvoz") +   
+  ggtitle("Količina izvoza v Severni Ameriki v milionih") +
+  coord_cartesian(xlim = c(-170, -20),  ylim = c(10, 90), expand = TRUE)  +
+  theme_map(base_size = 20)+
+  scale_fill_gradient(low="red3", high="yellow")
+
+#Severna Amerika uvoza
+plot_data2 <- TRGOVSKE_PARTNERJE %>% filter(Podatek == "Uvoz")
+
+zemljevid_severnaamerika_uvoz <- ggplot() + 
+  geom_polygon(data=left_join(zemljevid %>% filter(CONTINENT=="North America"),plot_data2, by=c("SOVEREIGNT"="Drzave")),
+               aes(x=long, y=lat, group=group, fill=Vrednost/1e6), size=0.1) +
+  labs(x="", y="", fill="Uvoz") +   
+  ggtitle("Količina uvoza v Severni Ameriki v milionih") +
+  coord_cartesian(xlim = c(-170, -20),  ylim = c(10, 90), expand = TRUE)  +
+  theme_map(base_size = 20)+
+  scale_fill_gradient(low="red3", high="yellow")
