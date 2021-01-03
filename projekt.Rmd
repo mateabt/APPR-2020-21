@@ -69,7 +69,8 @@ Spodnji zemljevid prikazuje neto izvoz v milionih v svetovne države.
 zemljevid_neto_izvoz
 ```
 
-Iz `Zemjevid 1` ,lahko opazimo da Nemčija ima največji neto izvoz z ZDA, Združenega kraljestva ter Francijo
+Iz `Zemjevid 1` ,lahko opazimo da Nemčija ima največji neto izvoz z ZDA,
+Združenega kraljestva ter Francijo
 
 ***
 
@@ -81,7 +82,8 @@ graf4
 ```
 
 
-Vidno je, da v leta 2019 izvajala Nemčija več dobrin kot je uvažala,kar pozitivno vpliva na njihovem BDP.
+Vidno je, da v leta 2019 izvajala Nemčija več dobrin kot je uvažala,kar 
+pozitivno vpliva na njihovem BDP.
 
 ***
 Poglejmo kako se je trgovina gibala čez leti
@@ -90,9 +92,10 @@ Poglejmo kako se je trgovina gibala čez leti
 animacija
 ```
 
-Opazimo narasčajoči trend izvoza ter uvoza.Tudi razmik med izvozom in uvozom se je povečeval.
-Edina odstapka od tistega sklepa opazimo v času krize ko so se izvoz ter uvoz zmanjšali kot 
-posledica polabšanih gospodarskih razmer(negotovost,manjše povpraševanje itn.)
+Opazimo narasčajoči trend izvoza ter uvoza.Tudi razmik med izvozom in uvozom se 
+je povečeval.Edina odstapka od tistega sklepa opazimo v času krize ko so se 
+izvoz ter uvoz zmanjšali kot posledica polabšanih gospodarskih razmer
+(negotovost,manjše povpraševanje itn.)
 
 
 
@@ -100,25 +103,48 @@ posledica polabšanih gospodarskih razmer(negotovost,manjše povpraševanje itn.
 ```{r shiny, echo=FALSE}
 shinyAppDir("shiny", options=list(width="110%", height=750))
 ```
-V namen analize sem dala v eno sliko podatke za uvoz in izvoz da bi lahko primerjali dejavnosti
-med sabo.Največji izvoz opazimo v gozdarstvu.Uvoz pa je v letu 2019  bil največji pri ribe in ribne produkte,vendar pa če bi pogledali neto izvoz v tabeli vidimo da je tisti največji bil pri kovinske rude
+V namen analize sem dala v eno sliko podatke za uvoz in izvoz da bi lahko 
+primerjali dejavnosti med sabo.Največji izvoz opazimo v gozdarstvu.Uvoz pa je v
+letu 2019  bil največji pri ribe in ribne produkte,vendar pa če bi pogledali 
+neto izvoz v tabeli vidimo da je tisti največji bil pri kovinske rude
 
 ***
 ```{r BDP_neto, echo=FALSE, fig.align='center', warning=FALSE, fig.cap='Graf 2'}
 graf7
 ```
 
-iz `graf2` lahko opazimo da se je BDP(rdeča) gibal v skladu z neto izvozom 
+iz `graf2` lahko opazimo da se je BDP(rdeča) gibal v skladu z neto izvozom torej
+v skladu z makroekonomsko analizo 
 
 ***
 ```{r shiny2, echo=FALSE}
 shinyAppDir("shiny2", options=list(width="110%", height=750))
 ```
 
-Na te slike lahko detalno pogledamo izvoz in uvoz na različne kontinente.
+Na te slike lahko detalno pogledamo izvoz in uvoz na različne kontinente.Opazimo
+da je največji uvoz ter izvoz v Evropi ,vender pa tudi trgovajo predvsem z ZDA
+in Kitajsko
 
 ***
 # Napredna analiza podatkov
 
+```{r analiza, echo=FALSE, message=FALSE}
+source("analiza/analiza.r", encoding="UTF-8")
+```
+
+```{r graf, echo=FALSE, fig.align='center',fig.cap='Graf3'}
+graf.napoved
+```
+Na zgornjem `graf 3` lahko pogledamo napoved za naslednje leti (2020-2024) 
+gledano na pretekle leta oz. gledano na obdobje (1950-2019).Napovedi z uporabo
+linearne regresije so bili optimistični sicer v tem trenutku noben ni pričekoval
+da bo takšne krize kot je zdaj.Vender pa po mojem mnenjem to ne bo drastično 
+vplivalo na njihovo trgovini ,lahko tudi nasprotno bi se trgovina povečala.
+
+***
+# Zaključek 
+Glede na analizirane podatke lahko zaključimo da sta izvoz ter uvoz zelo 
+pomembna za razvitek ene države ter medseboj odvisna.Tudi lahko opazimo
+da je trgovanje zelo prociklično in da se takoj zmanjša v času krize.
 
 
