@@ -4,13 +4,13 @@ library(shiny)
 
 server <- function(input, output, session) {
   output$filter_degree<-renderUI({
-    radioButtons("rd","Izberi ",choices = c("tortni","stolpične",'razpredelnice'),
+    radioButtons("rd","Izberi ",choices = c("tortni","stolpičen",'razpredelnica'),
                  selected = "tortni")
   })
   
   
   output$plot <- renderUI({
-    if(input$rd=="stolpične"){
+    if(input$rd=="stolpičen"){
       output$plot1<-renderPlot({
         ptlist<-list(stolpicni_izvoz,stolpicni_uvoz)
         grid.arrange(grobs=ptlist)
@@ -37,7 +37,7 @@ server <- function(input, output, session) {
     }
     
     
-    else if(input$rd=="razpredelnice"){
+    else if(input$rd=="razpredelnica"){
       
       output$tbl =renderDataTable(razdelitve1)
       

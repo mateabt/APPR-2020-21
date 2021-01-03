@@ -107,3 +107,8 @@ Največji izvoz opazimo v gozdarstvu.Uvoz pa je v letu 2019  bil največji pri r
 graf7
 ```
 iz `graf7` lahko opazimo da se je BDP(rdeča) gibal v skladu z neto izvozom 
+
+***
+***
+```{r shiny2, echo=FALSE}
+shinyAppDir("shiny2", options=list(width="110%", height=750))
