@@ -5,7 +5,8 @@ library(shiny)
 server <- function(input, output, session) {
     output$filter_degree<-renderUI({
         selectInput("rd","Izberi zeleno geografsko podrocje ",
-                    choices = c("Svet","Evropa","Afrika","Južna Amerika" ),
+                    choices = c("Svet","Evropa","Afrika","Južna Amerika","Severna Amerika",
+                                "Avstralija in Oceanija","Azija" ),
                      selected = NULL)
     })
     
@@ -46,6 +47,36 @@ server <- function(input, output, session) {
                 grid.arrange(grobs=ptlist)
             })
             plotOutput("plot4", height = 650)
+            
+        }
+        
+        else if(input$rd=="Severna Amerika"){
+            
+            output$plot5<-renderPlot({
+                ptlist<-list(zemljevid_severnaamerika_izvoz,zemljevid_severnaamerika_uvoz)
+                grid.arrange(grobs=ptlist)
+            })
+            plotOutput("plot5", height = 650)
+            
+        }
+        
+        else if(input$rd=="Avstralija in Oceanija"){
+            
+            output$plot6<-renderPlot({
+                ptlist<-list(zemljevid_avstralija_izvoz,zemljevid_avstralija_uvoz)
+                grid.arrange(grobs=ptlist)
+            })
+            plotOutput("plot6", height = 650)
+            
+        }
+        
+        else if(input$rd=="Azija"){
+            
+            output$plot6<-renderPlot({
+                ptlist<-list(zemljevid_azija_izvoz,zemljevid_azija_uvoz)
+                grid.arrange(grobs=ptlist)
+            })
+            plotOutput("plot6", height = 650)
             
         }
         

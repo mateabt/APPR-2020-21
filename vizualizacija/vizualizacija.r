@@ -290,3 +290,28 @@ zemljevid_avstralija_uvoz <- ggplot() +
   coord_cartesian(xlim = c(110, 190), ylim = c(-50, 0), expand = TRUE)  +
   theme_map(base_size = 20)+
   scale_fill_gradient(low="red3", high="yellow")
+
+#Azija izvoz
+plot_data2 <- TRGOVSKE_PARTNERJE %>% filter(Podatek == "Izvoz")
+
+zemljevid_azija_izvoz <- ggplot() + 
+  geom_polygon(data=left_join(zemljevid %>% filter(CONTINENT=="Asia"),plot_data2, by=c("SOVEREIGNT"="Drzave")),
+               aes(x=long, y=lat, group=group, fill=Vrednost/1e6), size=0.1) +
+  labs(x="", y="", fill="Izvoz") +   
+  ggtitle("Količina izvoza v Aziji v milionih") +
+  coord_cartesian(xlim=c(20,160),ylim=c(-20,60), expand = TRUE)  +
+  theme_map(base_size = 20)+
+  scale_fill_gradient(low="red3", high="yellow")
+
+
+#Azija uvoz
+plot_data2 <- TRGOVSKE_PARTNERJE %>% filter(Podatek == "Uvoz")
+
+zemljevid_azija_uvoz <- ggplot() + 
+  geom_polygon(data=left_join(zemljevid %>% filter(CONTINENT=="Asia"),plot_data2, by=c("SOVEREIGNT"="Drzave")),
+               aes(x=long, y=lat, group=group, fill=Vrednost/1e6), size=0.1) +
+  labs(x="", y="", fill="Uvoz") +   
+  ggtitle("Količina uvoza v Aziji v milionih") +
+  coord_cartesian(xlim=c(20,160),ylim=c(-20,60), expand = TRUE)  +
+  theme_map(base_size = 20)+
+  scale_fill_gradient(low="red3", high="yellow")
