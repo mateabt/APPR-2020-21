@@ -12,11 +12,22 @@ server <- function(input, output, session) {
     output$plot <- renderUI({
         if(input$rd=="Svet"){
             output$plot1<-renderPlot({
-                ptlist<-list(zemljevid_evropa_izvoz,zemljevid_evropa_uvoz)
+                ptlist<-list(zemljevid_svet_izvoz,zemljevid_svet_uvoz)
                 grid.arrange(grobs=ptlist)
             })
             plotOutput("plot1", height = 650)
         }
+        
+        else if(input$rd=="Evropa"){
+            
+            output$plot2M<-renderPlot({
+                ptlist<-list(zemljevid_evropa_izvoz,zemljevid_evropa_uvoz)
+                grid.arrange(grobs=ptlist)
+            })
+            plotOutput("plot2", height = 650)
+            
+        }
+        
     })
     
 }

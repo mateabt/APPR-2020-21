@@ -172,7 +172,7 @@ zemljevid_svet_izvoz <- ggplot() +
   geom_polygon(data=left_join(zemljevid,plot_data3, by=c("SOVEREIGNT"="Drzave")),
                aes(x=long, y=lat, group=group, fill=Vrednost/1e6), size=0.1) +
   labs(x="", y="", fill="Uvoz") +   
-  ggtitle("Količina uvoza v Evropi v milionih") +
+  ggtitle("Količina uvoza v Svetu v milionih") +
   theme_map(base_size = 20)+
   scale_fill_gradient(low="red3", high="yellow")
 
@@ -184,7 +184,7 @@ zemljevid_svet_uvoz <- ggplot() +
   geom_polygon(data=left_join(zemljevid,plot_data4, by=c("SOVEREIGNT"="Drzave")),
                aes(x=long, y=lat, group=group, fill=Vrednost/1e6), size=0.1) +
   labs(x="", y="", fill="Uvoz") +   
-  ggtitle("Količina uvoza v Evropi v milionih") +
+  ggtitle("Količina uvoza v Svetu v milionih") +
   theme_map(base_size = 20)+
   scale_fill_gradient(low="red3", high="yellow")
       
