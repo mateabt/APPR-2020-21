@@ -229,7 +229,7 @@ zemljevid_juznaamerika_izvoz <- ggplot() +
   theme_map(base_size = 20)+
   scale_fill_gradient(low="red3", high="yellow")
 
-#Juzna Amerika uvoza
+#Juzna Amerika uvoz
 plot_data2 <- TRGOVSKE_PARTNERJE %>% filter(Podatek == "Uvoz")
 
 zemljevid_juznaamerika_uvoz <- ggplot() + 
@@ -254,7 +254,7 @@ zemljevid_severnaamerika_izvoz <- ggplot() +
   theme_map(base_size = 20)+
   scale_fill_gradient(low="red3", high="yellow")
 
-#Severna Amerika uvoza
+#Severna Amerika uvoz
 plot_data2 <- TRGOVSKE_PARTNERJE %>% filter(Podatek == "Uvoz")
 
 zemljevid_severnaamerika_uvoz <- ggplot() + 
@@ -263,5 +263,30 @@ zemljevid_severnaamerika_uvoz <- ggplot() +
   labs(x="", y="", fill="Uvoz") +   
   ggtitle("Količina uvoza v Severni Ameriki v milionih") +
   coord_cartesian(xlim = c(-170, -20),  ylim = c(10, 90), expand = TRUE)  +
+  theme_map(base_size = 20)+
+  scale_fill_gradient(low="red3", high="yellow")
+
+
+#Avstralija in Oceanijo izvoz
+plot_data2 <- TRGOVSKE_PARTNERJE %>% filter(Podatek == "Izvoz")
+
+zemljevid_avstralija_izvoz <- ggplot() + 
+  geom_polygon(data=left_join(zemljevid %>% filter(CONTINENT=="Oceania" | SOVEREIGNT=="Austrlia"),plot_data2, by=c("SOVEREIGNT"="Drzave")),
+               aes(x=long, y=lat, group=group, fill=Vrednost/1e6), size=0.1) +
+  labs(x="", y="", fill="Izvoz") +   
+  ggtitle("Količina izvoza v Avstraliji v milionih") +
+  coord_cartesian(xlim = c(110, 190), ylim = c(-50, 0), expand = TRUE)  +
+  theme_map(base_size = 20)+
+  scale_fill_gradient(low="red3", high="yellow")
+
+#Avstralija in Oceanijo uvoz
+plot_data2 <- TRGOVSKE_PARTNERJE %>% filter(Podatek == "Uvoz")
+
+zemljevid_avstralija_uvoz <- ggplot() + 
+  geom_polygon(data=left_join(zemljevid %>% filter(CONTINENT=="Oceania" | SOVEREIGNT=="Austrlia"),plot_data2, by=c("SOVEREIGNT"="Drzave")),
+               aes(x=long, y=lat, group=group, fill=Vrednost/1e6), size=0.1) +
+  labs(x="", y="", fill="Uvoz") +   
+  ggtitle("Količina uvoza v Avstraliji v milionih") +
+  coord_cartesian(xlim = c(110, 190), ylim = c(-50, 0), expand = TRUE)  +
   theme_map(base_size = 20)+
   scale_fill_gradient(low="red3", high="yellow")
