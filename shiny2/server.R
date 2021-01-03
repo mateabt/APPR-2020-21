@@ -4,7 +4,8 @@ library(shiny)
 
 server <- function(input, output, session) {
     output$filter_degree<-renderUI({
-        selectInput("rd","Izberi zeleno geografsko podrocje ",choices = c("Svet","Evropa","Afrika"),
+        selectInput("rd","Izberi zeleno geografsko podrocje ",
+                    choices = c("Svet","Evropa","Afrika","Južna Amerika" ),
                      selected = NULL)
     })
     
@@ -35,6 +36,16 @@ server <- function(input, output, session) {
                 grid.arrange(grobs=ptlist)
             })
             plotOutput("plot3", height = 650)
+            
+        }
+        
+        else if(input$rd=="Južna Amerika"){
+            
+            output$plot4<-renderPlot({
+                ptlist<-list(zemljevid_juznaamerika_izvoz,zemljevid_juznaamerika_uvoz)
+                grid.arrange(grobs=ptlist)
+            })
+            plotOutput("plot4", height = 650)
             
         }
         

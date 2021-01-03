@@ -171,8 +171,8 @@ plot_data3 <- TRGOVSKE_PARTNERJE %>% filter(Podatek == "Izvoz")
 zemljevid_svet_izvoz <- ggplot() + 
   geom_polygon(data=left_join(zemljevid,plot_data3, by=c("SOVEREIGNT"="Drzave")),
                aes(x=long, y=lat, group=group, fill=Vrednost/1e6), size=0.1) +
-  labs(x="", y="", fill="Uvoz") +   
-  ggtitle("Količina uvoza v Svetu v milionih") +
+  labs(x="", y="", fill="Izvoz") +   
+  ggtitle("Količina izvoza v Svetu v milionih") +
   theme_map(base_size = 20)+
   scale_fill_gradient(low="red3", high="yellow")
 
@@ -189,39 +189,11 @@ zemljevid_svet_uvoz <- ggplot() +
   scale_fill_gradient(low="red3", high="yellow")
 
 
-#Afrika uvoz
-plot_data2 <- TRGOVSKE_PARTNERJE %>% filter(Podatek == "Uvoz")
-
-zemljevid_afrika_uvoz <- ggplot() + 
-  geom_polygon(data=left_join(zemljevid %>% filter(CONTINENT=="Africa"),plot_data2, by=c("SOVEREIGNT"="Drzave")),
-               aes(x=long, y=lat, group=group, fill=Vrednost/1e6), size=0.1) +
-  labs(x="", y="", fill="Uvoz") +   
-  ggtitle("Količina uvoza v Afriki v milionih") +
-  coord_cartesian(xlim = c(-25,55),
-                  ylim = c(-40,40), expand = TRUE)  +
-  theme_map(base_size = 20)+
-  scale_fill_gradient(low="red3", high="yellow")
-
-
-#Afrika uvoz
-plot_data2 <- TRGOVSKE_PARTNERJE %>% filter(Podatek == "Uvoz")
-
-zemljevid_afrika_uvoz <- ggplot() + 
-  geom_polygon(data=left_join(zemljevid %>% filter(CONTINENT=="Africa"),plot_data2, by=c("SOVEREIGNT"="Drzave")),
-               aes(x=long, y=lat, group=group, fill=Vrednost/1e6), size=0.1) +
-  labs(x="", y="", fill="Uvoz") +   
-  ggtitle("Količina uvoza v Afriki v milionih") +
-  coord_cartesian(xlim = c(-25,55),
-                  ylim = c(-40,40), expand = TRUE)  +
-  theme_map(base_size = 20)+
-  scale_fill_gradient(low="red3", high="yellow")
-
-
 #Afrika izvoz
-plot_data2 <- TRGOVSKE_PARTNERJE %>% filter(Podatek == "Izvoz")
+plot_data5 <- TRGOVSKE_PARTNERJE %>% filter(Podatek == "Izvoz")
 
 zemljevid_afrika_izvoz <- ggplot() + 
-  geom_polygon(data=left_join(zemljevid %>% filter(CONTINENT=="Africa"),plot_data2, by=c("SOVEREIGNT"="Drzave")),
+  geom_polygon(data=left_join(zemljevid %>% filter(CONTINENT=="Africa"),plot_data5, by=c("SOVEREIGNT"="Drzave")),
                aes(x=long, y=lat, group=group, fill=Vrednost/1e6), size=0.1) +
   labs(x="", y="", fill="Izvoz") +   
   ggtitle("Količina izvoza v Afriki v milionih") +
@@ -229,4 +201,42 @@ zemljevid_afrika_izvoz <- ggplot() +
                   ylim = c(-40,40), expand = TRUE)  +
   theme_map(base_size = 20)+
   scale_fill_gradient(low="red3", high="yellow")
-      
+
+
+#Afrika uvoz
+plot_data6 <- TRGOVSKE_PARTNERJE %>% filter(Podatek == "Uvoz")
+
+zemljevid_afrika_uvoz <- ggplot() + 
+  geom_polygon(data=left_join(zemljevid %>% filter(CONTINENT=="Africa"),plot_data6, by=c("SOVEREIGNT"="Drzave")),
+               aes(x=long, y=lat, group=group, fill=Vrednost/1e6), size=0.1) +
+  labs(x="", y="", fill="Uvoz") +   
+  ggtitle("Količina uvoza v Afriki v milionih") +
+  coord_cartesian(xlim = c(-25,55),
+                  ylim = c(-40,40), expand = TRUE)  +
+  theme_map(base_size = 20)+
+  scale_fill_gradient(low="red3", high="yellow")
+
+
+#Juzna Amerika izvoz
+plot_data2 <- TRGOVSKE_PARTNERJE %>% filter(Podatek == "Izvoz")
+
+zemljevid_juznaamerika_izvoz <- ggplot() + 
+  geom_polygon(data=left_join(zemljevid %>% filter(CONTINENT=="South America"),plot_data2, by=c("SOVEREIGNT"="Drzave")),
+               aes(x=long, y=lat, group=group, fill=Vrednost/1e6), size=0.1) +
+  labs(x="", y="", fill="Izvoz") +   
+  ggtitle("Količina izvoza v Južni Ameriki v milionih") +
+  coord_cartesian(xlim = c(-85, -35), ylim=c(-55,12), expand = TRUE)  +
+  theme_map(base_size = 20)+
+  scale_fill_gradient(low="red3", high="yellow")
+
+#Juzna Amerika uvoza
+plot_data2 <- TRGOVSKE_PARTNERJE %>% filter(Podatek == "Uvoz")
+
+zemljevid_juznaamerika_uvoz <- ggplot() + 
+  geom_polygon(data=left_join(zemljevid %>% filter(CONTINENT=="South America"),plot_data2, by=c("SOVEREIGNT"="Drzave")),
+               aes(x=long, y=lat, group=group, fill=Vrednost/1e6), size=0.1) +
+  labs(x="", y="", fill="Uvoz") +   
+  ggtitle("Količina uvoza v Južni Ameriki v milionih") +
+  coord_cartesian(xlim = c(-85, -35), ylim=c(-55,12), expand = TRUE)  +
+  theme_map(base_size = 20)+
+  scale_fill_gradient(low="red3", high="yellow")
