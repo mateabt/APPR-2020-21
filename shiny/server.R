@@ -1,5 +1,5 @@
 library(shiny)
-library(gridExtra)
+
 
 
 server <- function(input, output, session) {
@@ -31,7 +31,7 @@ server <- function(input, output, session) {
         par(mai = c(0,0,1,3))
         pie(slices, col=rainbow(length(lbls)),
             main="izvoz po razdelitve",clockwise=TRUE,cex=0.5,labels=pct1)
-            #legend("right", inset=c(-0.95,0),cex=0.5,legend =unique(lbls), bty="n",fill=rainbow(length(lbls)))
+            legend("right", inset=c(-0.95,0),cex=0.5,legend =unique(lbls), bty="n",fill=rainbow(length(lbls)))
       })
       
     }
