@@ -24,6 +24,8 @@ library(ggplot2)
 library(gganimate)
 library(gifski)
 
+library(gridExtra)
+
 
 
 # Uvozimo funkcije za pobiranje in uvoz zemljevida.
