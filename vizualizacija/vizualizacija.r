@@ -341,3 +341,30 @@ zemljevid_antarktika_uvoz <- ggplot() +
   coord_cartesian(xlim=c(-180,180),ylim=c(-140,0), expand = TRUE)  +
   theme_map(base_size = 20)+
   scale_fill_gradient(low="red3", high="yellow")
+
+
+#Tortni izvoz po vrsta blaga
+pie1<- ggplot(razdelitve1 %>% mutate(pct=izvoz / sum(izvoz) * 100) %>%
+                arrange(desc(`opis blaga`)) %>% mutate(pos=cumsum(pct) - pct/2), # položaji oznak
+              aes(x=0, y=pct, fill=str_wrap(`opis blaga`, 30))) + # dolga imena naj se prelomijo
+  coord_polar(theta="y") + geom_col(width=1) +
+  geom_text(aes(y=pos, label=ifelse(pct < 1, "", paste0(round(pct), "%"))), # ne izpiši oznak za majhne rezine
+            x=0.3, color="white") + ggtitle("Izvoz po vrsti blaga") +
+  guides(fill=guide_legend("Vrsta blaga")) + xlab("") + ylab("") +
+  scale_x_continuous(breaks=NULL)+ # os x naj se ne izriše
+  theme(axis.text = element_blank(),
+      axis.ticks = element_blank(),
+      panel.grid  = element_blank())
+
+#Tortni uvoz po vrsta blaga
+pie2<- ggplot(razdelitve1 %>% mutate(pct=uvoz / sum(uvoz) * 100) %>%
+              arrange(desc(`opis blaga`)) %>% mutate(pos=cumsum(pct) - pct/2), # položaji oznak
+              aes(x=0, y=pct, fill=str_wrap(`opis blaga`, 30))) + # dolga imena naj se prelomijo
+              coord_polar(theta="y") + geom_col(width=1) +
+              geom_text(aes(y=pos, label=ifelse(pct < 1, "", paste0(round(pct), "%"))), # ne izpiši oznak za majhne rezine
+                 x=0.3, color="white") + ggtitle("Uvoz po vrsti blaga") +
+  guides(fill=guide_legend("Vrsta blaga")) + xlab("") + ylab("") +
+  scale_x_continuous(breaks=NULL)+ # os x naj se ne izriše
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        panel.grid  = element_blank())
