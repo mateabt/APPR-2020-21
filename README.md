@@ -23,6 +23,10 @@ https://www.destatis.de/EN/Themes/Economy/Foreign-Trade/Tables/imports-exports.h
 Pogledala bi kako se je zunajna trgovina gibala po letih 
 https://www.destatis.de/EN/Themes/Economy/Foreign-Trade/Tables/overall-development-foreign-trade.pdf?__blob=publicationFile&fbclid=IwAR1fflqYZaQy5LMYTNbA3XWQhij-ERHS0VkPFFRbfZpD4rYhQqecATqdPI4
 
+* `4.tabela` :tsv (BDP po letih nominalne cene baza 2010 v milionih)
+Povezanost BDP-ja z neto izvozom
+https://ec.europa.eu/eurostat/databrowser/view/nama_10_gdp/default/table?lang=en
+
 
 
 ## Program
