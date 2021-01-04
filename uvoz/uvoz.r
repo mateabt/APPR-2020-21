@@ -174,6 +174,7 @@ UVOZ_BDP <- function(){
   colnames(uvoz) <- c("Leti","BDP")
   uvoz.df <- as.data.frame(uvoz)
   uvoz.df$Leti<-as.numeric(uvoz.df$Leti)
+  uvoz.df$BDP<-as.numeric(uvoz.df$BDP)
   
 return(uvoz.df)
 } 
