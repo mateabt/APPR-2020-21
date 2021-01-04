@@ -166,15 +166,19 @@ pdf<-Uvoz_pdf()
 
 
 # BDP po leti of 1991 nominalna cena baza 2010 v milionih
-
 UVOZ_BDP <- function(){
-  uvoz <-read_xlsx("podatki/GDP.xlsx")
-  colnames(uvoz)<-c("Leti","BDP")
-  uvoz$Leti<-as.numeric(uvoz$Leti)
-  return(uvoz)
-}
-
+  uvoz<-read.delim(file = 'podatki/BDP.tsv', sep = '\t', header =FALSE,)
+  uvoz<-t(as.matrix(uvoz))
+  rownames(uvoz) <- NULL
+  uvoz<-uvoz[-1,]
+  colnames(uvoz) <- c("Leti","BDP")
+  uvoz.df <- as.data.frame(uvoz)
+  
+return(uvoz.df)
+} 
 BDP<-UVOZ_BDP()
+
+
 
 
 
