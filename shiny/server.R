@@ -3,10 +3,7 @@ library(shiny)
 
 
 server <- function(input, output, session) {
-  output$filter_degree<-renderUI({
-    radioButtons("rd","Izberi ",choices = c("tortni","stolpičen",'razpredelnica'),
-                 selected = "tortni")
-  })
+ 
   
   
   output$plot <- renderUI({

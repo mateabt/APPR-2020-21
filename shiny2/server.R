@@ -3,13 +3,7 @@ library(shiny)
 
 
 server <- function(input, output, session) {
-    output$filter_degree<-renderUI({
-        selectInput("rd","Izberi želeno geografsko podrocje ",
-                    choices = c("Svet","Evropa","Afrika","Južna Amerika","Severna Amerika",
-                                "Avstralija in Oceanija","Azija","Antarktika" ),
-                     selected = NULL)
-    })
-    
+ 
     
     output$plot <- renderUI({
         if(input$rd=="Svet"){
