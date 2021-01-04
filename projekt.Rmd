@@ -141,7 +141,9 @@ gledano na pretekle leta oz. gledano na obdobje (1950-2019).Napovedi z uporabo
 linearne regresije so bili optimistični sicer v tem trenutku noben ni pričekoval
 da bo takšne krize kot je zdaj.Vender pa po mojem mnenjem to ne bo drastično 
 vplivalo na njihovo trgovini ,lahko tudi nasprotno bi se trgovina povečala.
+
 ***
+
 ```{r graf4, echo=FALSE, fig.align='center',fig.cap='Graf4'}
 graf.napoved2
 ```
@@ -150,7 +152,9 @@ zelo dobro napoveduje , saj so vse pikice blizu rdeče črte.Tuki sem naredila
 tudi predikcijo izvoza če bi bil uvoz `50,0000`,`1000000`ter `1200000` ki so 
 na grafu predstavljene z rumene trikotnike.Iz grafa tudi lahko vidimo da če se
 ena od premenjivki povečuje se tudi druga.
+
 ***
+
 # Zaključek 
 Glede na analizirane podatke lahko zaključimo da sta izvoz ter uvoz zelo 
 pomembna za razvitek ene države ter medseboj odvisna.Tudi lahko opazimo
