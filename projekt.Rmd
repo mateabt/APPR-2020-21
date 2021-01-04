@@ -54,6 +54,9 @@ Uvozila sem podatke o Nemškem trgovinu v obliki xlsx s statističnega urada Nem
   - `Podatke`-spremenljivka : tip trgovine(uvoz,izvoz,neto izvoz ali obrt)(besedilo)
   - `Vrednost v milionih` - meritev:količino prej naštetih spremenljivk iz Podatke(število)
   
+4.`BDP`-bruto domači proizvod Nemčije po leti (od 1991 naprej)
+- `leto` - spremenljivka:letih pri kateri gledamo BDP(število)
+ - `BDP` - meritev:Vrednost BDP v naštetem letu(število)  
 
 ***
 # Analiza in vizualizacija podatkov
