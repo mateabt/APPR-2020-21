@@ -36,7 +36,7 @@ Spodaj je prikazanih nekaj podatkov o Nemškem trgovanju.
 source("uvoz/uvoz.r", encoding="UTF-8")
 ```
 
-Uvozila sem podatke o Nemškem trgovinu v obliki xlsx s statističnega urada Nemčije ter v obliki HTML in PDF datoteke. Podatke sem prečistila in dala v treh razpredelnicah v obliki *tidy data*.
+Uvozila sem podatke o Nemškem trgovinu v obliki `xlsx` s statističnega urada Nemčije ter v obliki `HTML` in `PDF` datoteke.Dodala sem še eno datoteko o BDP Nemčije po nominalnih cenah v milionih (bazno leto 2010) iz Eurostata v obliki `tsv` .Podatke sem prečistila in dala v treh razpredelnicah v obliki *tidy data*.
 
 1. `TRGOVSKE_PARTNERJE` - podatki o Nemških trgovskih partnerjev
   - `Drzave` -spremenljivka: trgovske partnerje (besedilo)
@@ -55,7 +55,7 @@ Uvozila sem podatke o Nemškem trgovinu v obliki xlsx s statističnega urada Nem
   - `Vrednost v milionih` - meritev:količino prej naštetih spremenljivk iz Podatke(število)
   
 4.`BDP`-bruto domači proizvod Nemčije po leti (od 1991 naprej)
-- `leto` - spremenljivka:letih pri kateri gledamo BDP(število)
+- `Leti` - spremenljivka:letih pri kateri gledamo BDP(število)
  - `BDP` - meritev:Vrednost BDP v naštetem letu(število)  
 
 ***
