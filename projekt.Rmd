@@ -131,13 +131,21 @@ da je največji uvoz ter izvoz v Evropi ,vender pa tudi trgovajo predvsem z ZDA
 in Kitajsko
 
 ***
+```{r pomembne, echo=FALSE, fig.align='center', warning=FALSE, fig.cap='Graf 3'}
+graf_vrh
+```
+
+Na tisti sliki bolj previdno vidimo izvoz in uvoz v najpomembnejše trgovske 
+zemlje Nemčije
+
+***
 # Napredna analiza podatkov
 
 ```{r analiza, echo=FALSE, message=FALSE}
 source("analiza/analiza.r", encoding="UTF-8")
 ```
 
-```{r graf3, echo=FALSE, fig.align='center',fig.cap='Graf3'}
+```{r graf3, echo=FALSE, fig.align='center',fig.cap='Graf 4'}
 graf.napoved1
 ```
 Na zgornjem `graf 3` lahko pogledamo napoved za naslednje leti (2020-2024) 
@@ -148,8 +156,9 @@ vplivalo na njihovo trgovini ,lahko tudi nasprotno bi se trgovina povečala.
 
 ***
 
-```{r graf4, echo=FALSE, fig.align='center',fig.cap='Graf4'}
+```{r graf4, echo=FALSE, fig.align='center',fig.cap='Graf 5'}
 graf.napoved2
+
 ```
 Od tuki lahko vidimo kakšno je povezavo med uvozom in izvozom.Tuki naš model
 zelo dobro napoveduje , saj so vse pikice blizu rdeče črte.Tuki sem naredila 

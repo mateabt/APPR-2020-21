@@ -368,3 +368,18 @@ pie2<- ggplot(razdelitve1 %>% mutate(pct=uvoz / sum(uvoz) * 100) %>%
   theme(axis.text = element_blank(),
         axis.ticks = element_blank(),
         panel.grid  = element_blank())
+
+# Najpomembni partnerji barplot
+
+vrh <- TRGOVSKE_PARTNERJE %>% 
+      filter((Podatek == "Uvoz"|  Podatek == "Izvoz") & ( Drzave == "United States" | Drzave == "China" | Drzave =="United Kingdom"))
+                                                              
+
+graf_vrh<- ggplot() +
+           geom_bar(data = vrh, aes(x = Drzave, y = Vrednost, fill = Podatek), position = "dodge", stat = "identity")+
+           ggtitle("Najpomembne trgovske partnerje") +scale_y_continuous(labels=scales::comma)+
+          scale_fill_manual(values=c("yellow","red"))+ylab("Vrednost v tisočih")
+          
+
+  
+  
