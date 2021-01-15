@@ -56,8 +56,9 @@ Uvozila sem podatke o Nemškem trgovinu v obliki `xlsx` s statističnega urada N
   
   
 4.`BDP`-bruto domači proizvod Nemčije po leti (od 1991 naprej)
-- `Leti` - spremenljivka:letih pri kateri gledamo BDP(število)
- - `BDP` - meritev:Vrednost BDP v naštetem letu(število)  
+  - `Leti` - spremenljivka:letih pri kateri gledamo BDP(število)
+  - `BDP` - meritev:Vrednost BDP v naštetem letu(število)  
+ 
 
 ***
 # Analiza in vizualizacija podatkov
