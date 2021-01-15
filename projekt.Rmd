@@ -61,6 +61,7 @@ Uvozila sem podatke o Nemškem trgovinu v obliki `xlsx` s statističnega urada N
  
 
 ***
+
 # Analiza in vizualizacija podatkov
 
 ```{r vizualizacija, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
