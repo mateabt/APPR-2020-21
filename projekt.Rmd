@@ -131,6 +131,12 @@ da je največji uvoz ter izvoz v Evropi ,vender pa tudi trgovajo predvsem z ZDA
 in Kitajsko
 
 ***
+```{r pomembne, echo=FALSE, fig.align='center', warning=FALSE, fig.cap='Animacija 2'}
+graf_gib
+```
+Za lažjo predstavitel vseh podatkov čez leti sem dodala še eno animacijo.
+
+***
 ```{r pomembne, echo=FALSE, fig.align='center', warning=FALSE, fig.cap='Graf 3'}
 graf_vrh
 ```
