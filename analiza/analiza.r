@@ -19,7 +19,8 @@ graf.napoved1 <- ggplot(tabela.napoved1, aes(x = leto, y = neto_izvoz)) +
   geom_smooth(method = 'lm', formula = y ~ x,col="red") +
   theme(axis.text.x=element_text(angle=90, vjust=0.5, hjust=1),
          panel.grid.minor = element_blank())+
-  scale_y_continuous(labels=comma)
+  scale_y_continuous(labels=comma)+
+  geom_point(data=napoved1, aes(x=leto, y=neto_izvoz), fill='yellow',shape=21, size=2)
   
   
 
