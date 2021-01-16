@@ -38,8 +38,8 @@
  #bubble aminimated zemjevid
  
  pdf1 <-pdf %>%pivot_wider( names_from = "Podatek",values_from = "Vrednost v milionih")
- skupaj<-left_join(BDP,pdf1,by=c("Leti"="leto"))
- skupaj$Leti<-as.numeric(skupaj$Leti)
+ skupaj<-left_join(BDP,pdf1,by=c("leto"="leto"))
+ skupaj$leto<-as.numeric(skupaj$leto)
  
 
  

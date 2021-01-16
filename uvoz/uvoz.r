@@ -168,11 +168,14 @@ pdf<-Uvoz_pdf()
 # BDP po leti of 1991 nominalna cena baza 2010 v milionih
 UVOZ_BDP <- function(){
   
-  BDP <- read_tsv('podatki/BDP.tsv') %>% select(-1) %>%
-         pivot_longer(everything(), names_to='leto', values_to='BDP',
+  BDP1 <- read_tsv('podatki/BDP.tsv') %>% select(-1) %>%
+         pivot_longer(everything(), names_to='Leti', values_to='BDP',
          names_transform=c(leto=parse_number))
- 
-return(BDP)
+  
+  BDP1$Leti<-as.numeric(BDP1$Leti)
+  BDP1$BDP<-as.numeric(BDP1$BDP)
+  
+return(BDP1)
 } 
 BDP<-UVOZ_BDP()
 
