@@ -385,6 +385,6 @@ graf_vrh<- ggplot() +
 
 graf_gib <- ggplot(data = pdf , aes(x=leto, y=`Vrednost v milionih`/1e3,color=Podatek)) + geom_line(aes(frame=Podatek))
 # ggplot2 ne prepozna frame plotly ga prepozna
-graf_gib <- graf_gib + xlab("Leto") + ylab('Vrednost v milijardih')+ theme(legend.position = "none")
+graf_gib <- graf_gib + xlab("Leto") + ylab('Vrednost v milijardah')+ theme(legend.position = "none")
 graf_gib <- ggplotly(graf_gib)
   

@@ -154,7 +154,9 @@ source("analiza/analiza.r", encoding="UTF-8")
 ```
 
 ```{r graf3, echo=FALSE, fig.align='center',fig.cap='Graf 4'}
+
 graf.napoved1
+
 ```
 Na zgornjem `graf 3` lahko pogledamo napoved za naslednje leti (2020-2024) 
 gledano na pretekle leta oz. gledano na obdobje (1950-2019).Napovedi z uporabo
