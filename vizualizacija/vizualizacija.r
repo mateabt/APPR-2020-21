@@ -38,8 +38,8 @@
  #bubble aminimated zemjevid
  
  pdf1 <-pdf %>%pivot_wider( names_from = "Podatek",values_from = "Vrednost v milionih")
- skupaj<-left_join(BDP,pdf1,by=c("leto"="leto"))
- skupaj$leto<-as.numeric(skupaj$leto)
+ skupaj<-left_join(BDP,pdf1,by=c("Leti"="leto"))
+ skupaj$Leti<-as.numeric(skupaj$Leti)
  
 
  
@@ -383,8 +383,8 @@ graf_vrh<- ggplot() +
 
   #proba
 
-graf_gib <- ggplot(data = pdf , aes(x=leto, y=`Vrednost v milionih`,color=Podatek)) + geom_line(aes(frame=Podatek))
+graf_gib <- ggplot(data = pdf , aes(x=leto, y=`Vrednost v milionih`/1e3,color=Podatek)) + geom_line(aes(frame=Podatek))
 # ggplot2 ne prepozna frame plotly ga prepozna
-graf_gib <- graf_gib + xlab("Leto") + ylab('Vrednost v milionih')+ theme(legend.position = "none")
+graf_gib <- graf_gib + xlab("Leto") + ylab('Vrednost v milijardih')+ theme(legend.position = "none")
 graf_gib <- ggplotly(graf_gib)
   
